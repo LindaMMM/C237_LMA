@@ -21,21 +21,23 @@ class UserApp
     #[ORM\Column(length: 50)]
     private ?string $LastName = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $Email = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Pwd = null;
+    private ?string $PassworHash = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $Token = null;
+    #[ORM\ManyToMany(targetEntity: RoleApp::class)]
+    private Collection $Roles;
 
-    #[ORM\OneToMany(targetEntity: RoleUser::class, mappedBy: 'User', orphanRemoval: true)]
-    private Collection $Role;
-
-    public function __construct()
-    {
-        $this->Role = new ArrayCollection();
+    public function __construct($firstname, $lastname, $email, $passwordhash, $role)
+    {   
+        $this->Roles = new ArrayCollection(); 
+        $this->setFirstName($firstname);
+        $this->setLastName($lastname);
+        $this->setEmail($email);
+        $this->setPassworHash($passwordhash);
+        $this->addRole($role);
     }
 
     public function getId(): ?int
@@ -79,57 +81,40 @@ class UserApp
         return $this;
     }
 
-    public function getPwd(): ?string
+    public function getPassworHash(): ?string
     {
-        return $this->Pwd;
+        return $this->PassworHash;
     }
 
-    public function setPwd(string $Pwd): static
+    public function setPassworHash(string $PassworHash): static
     {
-        $this->Pwd = $Pwd;
-
-        return $this;
-    }
-
-    public function getToken(): ?string
-    {
-        return $this->Token;
-    }
-
-    public function setToken(string $Token): static
-    {
-        $this->Token = $Token;
+        $this->PassworHash = $PassworHash;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, RoleUser>
+     * @return Collection<int, RoleApp>
      */
-    public function getRole(): Collection
+    public function getRoles(): Collection
     {
-        return $this->Role;
+        return $this->Roles;
     }
 
-    public function addRole(RoleUser $role): static
+    public function addRole(RoleApp $role): static
     {
-        if (!$this->Role->contains($role)) {
-            $this->Role->add($role);
-            $role->setUser($this);
+        if (!$this->Roles->contains($role)) {
+            $this->Roles->add($role);
         }
 
         return $this;
     }
 
-    public function removeRole(RoleUser $role): static
+    public function removeRole(RoleApp $role): static
     {
-        if ($this->Role->removeElement($role)) {
-            // set the owning side to null (unless already changed)
-            if ($role->getUser() === $this) {
-                $role->setUser(null);
-            }
-        }
+        $this->Roles->removeElement($role);
 
         return $this;
     }
+
 }

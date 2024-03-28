@@ -11,38 +11,32 @@ class RoleApp
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private int $id;
+    private ?int $id = null;
 
-    #[ORM\Column(length: 4)]
-    private string $Code;
+    #[ORM\Column(length: 5)]
+    private ?string $code = null;
 
-    #[ORM\Column(length: 45)]
-    private string $Name;
-    
-    public function __construct($code, $name)
-    {    
-        $this->setCode($code);
-        $this->setName($name);
-    }
+    #[ORM\Column(length: 50)]
+    private ?string $Name = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCode(): string
+    public function getCode(): ?string
     {
-        return $this->Code;
+        return $this->code;
     }
 
-    public function setCode(string $Code): static
+    public function setCode(string $code): static
     {
-        $this->Code = $Code;
+        $this->code = $code;
 
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->Name;
     }
@@ -52,5 +46,11 @@ class RoleApp
         $this->Name = $Name;
 
         return $this;
+    }
+
+    public function __construct($code, $name)
+    {    
+        $this->setName($name);
+        $this->setCode($code);
     }
 }
