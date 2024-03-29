@@ -20,7 +20,29 @@ class ClientRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Client::class);
     }
-
+    /**
+     * @return Client[] Returns an array of Client objects
+     */
+    public function getall(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+     /**
+     * @return Client?
+     */
+    public function getById($id): ?Client
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+    
     //    /**
     //     * @return Client[] Returns an array of Client objects
     //     */

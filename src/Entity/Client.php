@@ -25,6 +25,9 @@ class Client
     #[ORM\OneToOne(mappedBy: 'client', cascade: ['persist', 'remove'])]
     private ?Credit $credit = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Utilisateur $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -84,6 +87,18 @@ class Client
         }
 
         $this->credit = $credit;
+
+        return $this;
+    }
+
+    public function getUser(): ?Utilisateur
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Utilisateur $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
