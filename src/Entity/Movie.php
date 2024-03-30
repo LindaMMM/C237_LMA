@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 class Movie
 {
@@ -17,7 +18,7 @@ class Movie
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $Name = null;
+    private ?string $name = null;
 
     #[ORM\Column(length: 2000)]
     private ?string $Summary = null;
@@ -37,13 +38,16 @@ class Movie
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $DateSortie = null;
 
-    #[ORM\ManyToMany(targetEntity: genre::class)]
+    #[ORM\ManyToMany(targetEntity: "Genre")]
+    #[ORM\JoinTable(name:"movie_genre")]
+    #[ORM\JoinColumn(name:"movie_id", referencedColumnName: "id")]
+    #[ORM\InverseJoinColumn(name:"genre_id", referencedColumnName: "id")]
     private Collection $genres;
 
-    public function __construct($name, $dateout)
+    public function __construct($name, $dateOut )
     {
         $this->setName($name);
-        $this->setDateSortie($dateout);
+        $this->setDateSortie($dateOut);
         $this->medias = new ArrayCollection();
         $this->emprunts = new ArrayCollection();
         $this->genres = new ArrayCollection();
@@ -56,12 +60,12 @@ class Movie
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
     public function setName(string $Name): static
     {
-        $this->Name = $Name;
+        $this->name = $Name;
 
         return $this;
     }

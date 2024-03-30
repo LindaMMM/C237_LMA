@@ -21,10 +21,17 @@ class MovieStock
     private ?int $stockIn = null;
 
     #[ORM\Column]
-    private ?int $stocOut = null;
+    private ?int $stockOut = null;
 
     #[ORM\Column]
     private ?int $stockReserved = null;
+
+    public function __construct($stIn)
+    {
+        $this->setStockIn($stIn);
+        $this->setStockOut(0);
+        $this->setStockReserved(0);
+    }
 
     public function getId(): ?int
     {
@@ -55,14 +62,14 @@ class MovieStock
         return $this;
     }
 
-    public function getStocOut(): ?int
+    public function getStockOut(): ?int
     {
-        return $this->stocOut;
+        return $this->stockOut;
     }
 
-    public function setStocOut(int $stocOut): static
+    public function setStockOut(int $stockOut): static
     {
-        $this->stocOut = $stocOut;
+        $this->stockOut = $stockOut;
 
         return $this;
     }
