@@ -19,10 +19,13 @@ class Movie
     #[ORM\Column(length: 100)]
     private ?string $Name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 2000)]
     private ?string $Summary = null;
 
-    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'movie')]
+    // * @ORM\ManyToOne(targetEntity="Movie", inversedBy="comments", cascade={"persist", "remove" })
+    // * @ORM\JoinColumn(name="capture_id", referencedColumnName="id",nullable=true)
+
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'movie', cascade: ['persist', 'remove'])]
     private Collection $medias;
 
     #[ORM\OneToOne(mappedBy: 'movie', cascade: ['persist', 'remove'])]
@@ -40,6 +43,7 @@ class Movie
     public function __construct($name)
     {
         $this->setName($name);
+        
         $this->medias = new ArrayCollection();
         $this->emprunts = new ArrayCollection();
         $this->genres = new ArrayCollection();
