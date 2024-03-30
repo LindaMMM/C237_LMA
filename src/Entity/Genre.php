@@ -20,6 +20,10 @@ class Genre
     {
         return $this->id;
     }
+    public function __construct($name)
+    {
+        $this->setName($name);
+    }
 
     public function getName(): ?string
     {

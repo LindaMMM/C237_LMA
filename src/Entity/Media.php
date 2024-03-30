@@ -26,6 +26,13 @@ class Media
     #[ORM\ManyToOne(inversedBy: 'medias')]
     private ?Movie $movie = null;
 
+    public function __construct($name, $path, $type)
+    {
+        $this->setName($name);
+        $this->setPath($path);
+        $this->setType($type);
+    }
+
     public function getId(): ?int
     {
         return $this->id;

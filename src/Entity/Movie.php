@@ -34,10 +34,14 @@ class Movie
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $DateSortie = null;
 
+    #[ORM\ManyToMany(targetEntity: genre::class)]
+    private Collection $genres;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
         $this->emprunts = new ArrayCollection();
+        $this->genres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,6 +158,30 @@ class Movie
     public function setDateSortie(\DateTimeInterface $DateSortie): static
     {
         $this->DateSortie = $DateSortie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, genre>
+     */
+    public function getGenres(): Collection
+    {
+        return $this->genres;
+    }
+
+    public function addGenre(genre $genre): static
+    {
+        if (!$this->genres->contains($genre)) {
+            $this->genres->add($genre);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(genre $genre): static
+    {
+        $this->genres->removeElement($genre);
 
         return $this;
     }
