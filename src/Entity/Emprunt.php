@@ -23,6 +23,9 @@ class Emprunt
     #[ORM\ManyToOne(inversedBy: 'emprunts')]
     private ?Movie $movie = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateRetour = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Emprunt
     public function setMovie(?Movie $movie): static
     {
         $this->movie = $movie;
+
+        return $this;
+    }
+
+    public function getDateRetour(): ?\DateTimeInterface
+    {
+        return $this->dateRetour;
+    }
+
+    public function setDateRetour(?\DateTimeInterface $dateRetour): static
+    {
+        $this->dateRetour = $dateRetour;
 
         return $this;
     }

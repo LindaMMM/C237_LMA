@@ -31,6 +31,10 @@ class Command
     #[ORM\OneToMany(targetEntity: Emprunt::class, mappedBy: 'command')]
     private Collection $emprunt;
 
+    #[ORM\ManyToOne(inversedBy: 'commands')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Client $client = null;
+
     public function __construct()
     {
         $this->emprunt = new ArrayCollection();
@@ -115,6 +119,18 @@ class Command
                 $emprunt->setCommand(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): static
+    {
+        $this->client = $client;
 
         return $this;
     }
