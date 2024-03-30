@@ -37,8 +37,9 @@ class Movie
     #[ORM\ManyToMany(targetEntity: genre::class)]
     private Collection $genres;
 
-    public function __construct()
+    public function __construct($name)
     {
+        $this->setName($name);
         $this->medias = new ArrayCollection();
         $this->emprunts = new ArrayCollection();
         $this->genres = new ArrayCollection();

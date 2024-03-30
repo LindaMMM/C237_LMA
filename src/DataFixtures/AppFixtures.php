@@ -65,7 +65,8 @@ class AppFixtures extends Fixture
 
         $movie_kung  = new Movie("Kung Fu Panda 4");
         $movie_kung->setSummary("Après trois aventures dans lesquelles le guerrier dragon Po a combattu les maîtres du mal les plus redoutables grâce à un courage et des compétences en arts martiaux inégalés, le destin va de nouveau frapper à sa porte pour… L’inviter à enfin se reposer. Plus précisément, pour être nommé chef spirituel de la vallée de la Paix. Cela pose quelques problèmes évidents.");
-        $movie_bobmarley->addGenre($genre_comedy);
+        $movie_bobmarley->addMedia(new Media("affiche", "https://www.allocine.fr/video/player_gen_cmedia=19604634&cfilm=306226.html", $type_Media_png));
+        $movie_kung->addGenre($genre_comedy);
         $manager->persist($movie_kung);
 
         $movie_bobmarley  = new Movie("Bob Marley: One love");
@@ -97,7 +98,6 @@ class AppFixtures extends Fixture
         $movie_bobmarley  = new Movie("Bob Marley: One love");
         $movie_bobmarley->setSummary("Bob Marley: One Love célèbre la vie et la musique d'une icône qui a inspiré des générations à travers son message d'amour et d'unité.
         Pour la première fois sur grand écran, découvrez l'histoire puissante de Bob Marley, sa résilience face à l’adversité, le chemin qui l’a amené à sa musique révolutionnaire.");
-        
         $manager->persist($movie_bobmarley);
         $movie_bobmarley  = new Movie("Bob Marley: One love");
         $movie_bobmarley->setSummary("Bob Marley: One Love célèbre la vie et la musique d'une icône qui a inspiré des générations à travers son message d'amour et d'unité.
