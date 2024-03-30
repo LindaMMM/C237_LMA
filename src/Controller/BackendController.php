@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class FrontendController extends AbstractController
+class BackendController extends AbstractController
 {
-    #[Route('/')]
+    #[Route('/backend', name: 'app_backend')]
     public function index(): Response
     {
-        return $this->render('frontend/index.html.twig', [
-            'controller_name' => 'FrontendController',
+        return $this->render('backend/index.html.twig', [
+            'controller_name' => 'BackendController',
         ]);
     }
 }
