@@ -23,9 +23,6 @@ class Movie
     #[ORM\Column(length: 2000)]
     private ?string $Summary = null;
 
-    // * @ORM\ManyToOne(targetEntity="Movie", inversedBy="comments", cascade={"persist", "remove" })
-    // * @ORM\JoinColumn(name="capture_id", referencedColumnName="id",nullable=true)
-
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'movie', cascade: ['persist', 'remove'])]
     private Collection $medias;
 
@@ -43,6 +40,9 @@ class Movie
     #[ORM\JoinColumn(name:"movie_id", referencedColumnName: "id")]
     #[ORM\InverseJoinColumn(name:"genre_id", referencedColumnName: "id")]
     private Collection $genres;
+
+    #[ORM\Column]
+    private ?bool $Enable = null;
 
     public function __construct($name, $dateOut )
     {
@@ -191,6 +191,18 @@ class Movie
     public function removeGenre(genre $genre): static
     {
         $this->genres->removeElement($genre);
+
+        return $this;
+    }
+
+    public function isEnable(): ?bool
+    {
+        return $this->Enable;
+    }
+
+    public function setEnable(bool $Enable): static
+    {
+        $this->Enable = $Enable;
 
         return $this;
     }

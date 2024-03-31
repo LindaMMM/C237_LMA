@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
@@ -16,7 +17,7 @@ class Client
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $Name = null;
+    private ?string $LastName = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Addres = null;
@@ -33,6 +34,18 @@ class Client
     #[ORM\OneToMany(targetEntity: Command::class, mappedBy: 'client')]
     private Collection $commands;
 
+    #[ORM\Column(length: 50)]
+    private ?string $FirstName = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $DateBirth = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $ValideEmail = null;
+
+    #[ORM\Column]
+    private ?bool $Enable = null;
+
     public function __construct()
     {
         $this->commands = new ArrayCollection();
@@ -43,14 +56,14 @@ class Client
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getLastName(): ?string
     {
-        return $this->Name;
+        return $this->LastName;
     }
 
-    public function setName(string $Name): static
+    public function setLastName(string $Name): static
     {
-        $this->Name = $Name;
+        $this->LastName = $Name;
 
         return $this;
     }
@@ -139,6 +152,54 @@ class Client
                 $command->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->FirstName;
+    }
+
+    public function setFirstName(string $FirstName): static
+    {
+        $this->FirstName = $FirstName;
+
+        return $this;
+    }
+
+    public function getDateBirth(): ?\DateTimeInterface
+    {
+        return $this->DateBirth;
+    }
+
+    public function setDateBirth(\DateTimeInterface $DateBirth): static
+    {
+        $this->DateBirth = $DateBirth;
+
+        return $this;
+    }
+
+    public function getValideEmail(): ?string
+    {
+        return $this->ValideEmail;
+    }
+
+    public function setValideEmail(string $ValideEmail): static
+    {
+        $this->ValideEmail = $ValideEmail;
+
+        return $this;
+    }
+
+    public function isEnable(): ?bool
+    {
+        return $this->Enable;
+    }
+
+    public function setEnable(?bool $Enable): static
+    {
+        $this->Enable = $Enable;
 
         return $this;
     }
