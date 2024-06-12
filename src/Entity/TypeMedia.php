@@ -19,10 +19,9 @@ class TypeMedia
     #[ORM\Column(length: 50)]
     private ?string $Name = null;
 
-    public function __construct($code, $name)
+    public function __construct()
     {
-        $this->setName($name);
-        $this->setCode($code);
+        
     }
 
     public function getId(): ?int

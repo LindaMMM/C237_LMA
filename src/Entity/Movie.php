@@ -44,15 +44,13 @@ class Movie
     #[ORM\Column]
     private ?bool $Enable = null;
 
-    public function __construct($name, $dateOut )
+    public function __construct()
     {
-        $this->setName($name);
-        $this->setDateSortie($dateOut);
         $this->medias = new ArrayCollection();
         $this->emprunts = new ArrayCollection();
         $this->genres = new ArrayCollection();
     }
-
+    
     public function getId(): ?int
     {
         return $this->id;

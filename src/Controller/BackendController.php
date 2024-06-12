@@ -13,6 +13,37 @@ class BackendController extends AbstractController
     {
         return $this->render('backend/index.html.twig', [
             'controller_name' => 'BackendController',
+            'title' => 'Acceuil',
         ]);
     }
+    public function sales() 
+    {
+        return $this->render('backend/index.html.twig', [
+            'controller_name' => 'BackendController',
+            'title' => 'Commandes',
+        ]);
+    }
+    public function types() 
+    {
+        return $this->render('backend/indextypes.html.twig', [
+            'controller_name' => 'BackendController',
+            'title' => 'Type',
+        ]);
+    }
+    public function movies() 
+    {
+        return $this->render('backend/index.html.twig', [
+            'controller_name' => 'BackendController',
+            'title' => 'Film',
+        ]);
+    }
+
+    public function users() 
+    {
+        return $this->render('backend/index.html.twig', [
+            'controller_name' => 'BackendController',
+        ]);
+    }
+
 }
+

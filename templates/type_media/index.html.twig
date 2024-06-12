@@ -1,0 +1,37 @@
+{% extends 'base-backend.html.twig' %}
+
+{% set title = "TypeMedia " %}
+
+{% block content %}
+    <h1>TypeMedia index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_media in type_media %}
+            <tr>
+                <td>{{ type_media.id }}</td>
+                <td>{{ type_media.Code }}</td>
+                <td>{{ type_media.Name }}</td>
+                <td>
+                    <a href="{{ path('app_type_media_show', {'id': type_media.id}) }}">show</a>
+                    <a href="{{ path('app_type_media_edit', {'id': type_media.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_media_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{# templates/frontend/find_books.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% set title = "Rechercher des livres" %} 
+
+{% block content %}
+   {{ form_start(form) }}
+      <p>{{ form_row(form.title_word) }}</p>
+      <p>{{ form_row(form.min_year) }}</p>
+      <p>{{ form_row(form.editor) }}</p>
+      <p>{{ form_widget(form.submit) }}</p>
+   {{ form_end(form) }}
+   {% if form.vars.submitted and form.vars.valid %}
+      <h2>Résultat</h2>
+      {% if books is not null and books|length > 0 %}
+         {% for book in books %}
+            <p><a href="{{ path('showBookDetails', {id: book.id}) }}">{{ book.title }}</a></p>
+         {% endfor %}
+      {% else %}
+         <p>Aucun livre ne correspond à votre recherche.</p>
+      {% endif %}
+   {% endif %}
+{% endblock %}

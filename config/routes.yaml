@@ -3,3 +3,48 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+# Frontend ###
+home:
+   path: /
+   controller: App\Controller\vt
+
+findMovieById:
+   path: /findMovieById
+   controller: App\Controller\FrontendController::findMovieById
+
+findMovies:
+   path: /findMovies
+   controller: App\Controller\FrontendController::findMovies
+
+showMovieDetails:
+   path: /showMovieDetails/{id}
+   controller: App\Controller\FrontendController::showMovieDetails
+   defaults:
+       id: 1
+   requirements:
+       id: '[1-9]+[0-9]*'
+# Backend ###
+
+movies:
+   path: /admin/movies
+   controller: App\Controller\BackendController::movies
+
+types:
+   path: /admin/types
+   controller: App\Controller\BackendController::types
+users:
+   path: /admin/users
+   controller: App\Controller\BackendController::users
+sales:
+   path: /admin/sales
+   controller: App\Controller\BackendController::sales
+
+app_type_media_all:
+   path: /type/media
+   controller: App\Controller\ApiTestController::getCollections
+
+app_type_credit_all:
+   path: /type/media
+   controller: App\Controller\ApiTestController::getCollections
+

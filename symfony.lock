@@ -1,4 +1,13 @@
 {
+    "doctrine/annotations": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.10",
+            "ref": "64d8583af5ea57b7afa4aba4b159907f3a148b05"
+        }
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.12",
         "recipe": {
@@ -36,6 +45,18 @@
         "files": [
             "config/packages/doctrine_migrations.yaml",
             "migrations/.gitignore"
+        ]
+    },
+    "php-cs-fixer/shim": {
+        "version": "3.56",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "16422bf8eac6c3be42afe07d37e2abc89d2bdf6b"
+        },
+        "files": [
+            ".php-cs-fixer.dist.php"
         ]
     },
     "phpunit/phpunit": {
@@ -311,6 +332,9 @@
         "files": [
             "config/packages/messenger.yaml"
         ]
+    },
+    "symfonycasts/tailwind-bundle": {
+        "version": "v0.5.1"
     },
     "twig/extra-bundle": {
         "version": "v3.8.0"

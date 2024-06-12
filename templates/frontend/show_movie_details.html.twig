@@ -1,0 +1,9 @@
+{# templates/frontend/show_book_details.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% set title = "Fiche film" %} 
+
+{% block content %}
+   {{ include('frontend/_dvd_detail.html.twig') }}
+   <p>Faire une <a href="{{ path('findMovies') }}">nouvelle recherche</a></p>
+{% endblock %}

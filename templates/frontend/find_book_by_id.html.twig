@@ -1,0 +1,15 @@
+{# templates/frontend/find_book_by_id.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% set title = "Rechercher un livre grâce à son identifiant" %} 
+
+{% block content %}
+   {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+      <p>{{ form_row(form.id) }}</p>
+      <p>{{ form_widget(form.submit) }}</p>
+   {{ form_end(form) }}
+   {% if form.vars.submitted and form.vars.valid %}
+      <h2>Résultat</h2>
+      {{ include('frontend/_book_details.html.twig') }}
+   {% endif %}
+{% endblock %}

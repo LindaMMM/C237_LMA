@@ -1,0 +1,16 @@
+{# templates/indextypes.html.twig #}
+{% extends 'backend/index.html.twig' %}
+
+{% block content %}
+
+<div>
+    {{ form_start(types) }}
+      <p>{{ form_row(types.code) }}</p>
+      <p>{{ form_row(types.name) }}</p>
+      <p>{{ form_row(types.editor) }}</p>
+      <p>{{ form_widget(types.submit) }}</p>
+   {{ form_end(types) }}
+</div>
+
+{% include 'backend/typecredit/indextypes.html.twig' %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base-backend.html.twig' %}
+
+
+{% set title = "New TypeMedia" %} 
+
+
+{% block content %}
+    <h1>Create new TypeMedia</h1>
+
+    {{ include('type_media/_form.html.twig') }}
+
+    <a href="{{ path('app_type_media_index') }}">back to list</a>
+{% endblock %}
