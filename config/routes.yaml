@@ -28,23 +28,18 @@ showMovieDetails:
 
 movies:
    path: /admin/movies
-   controller: App\Controller\BackendController::movies
+   controller: App\Controller\Admin\MovieController::index
 
 types:
    path: /admin/types
    controller: App\Controller\BackendController::types
+
 users:
-   path: /admin/users
-   controller: App\Controller\BackendController::users
+   path: /admin/user
+   controller: App\Controller\Admin\ClientController::index
+
 sales:
    path: /admin/sales
-   controller: App\Controller\BackendController::sales
+   controller:  App\Controller\Admin\CommandController::index
 
-app_type_media_all:
-   path: /type/media
-   controller: App\Controller\ApiTestController::getCollections
-
-app_type_credit_all:
-   path: /type/media
-   controller: App\Controller\ApiTestController::getCollections
 

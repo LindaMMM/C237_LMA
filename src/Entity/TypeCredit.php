@@ -25,11 +25,9 @@ class TypeCredit
     #[ORM\Column]
     private ?bool $Enable = null;
 
-    public function __construct($name, $nbcredit, $price)
+    public function __construct()
     {
-        $this->setName($name);
-        $this->setNbCredit($nbcredit);
-        $this->setPrix($price);
+        
     }
     public function getId(): ?int
     {

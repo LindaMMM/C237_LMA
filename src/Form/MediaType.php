@@ -19,12 +19,9 @@ class MediaType extends AbstractType
             ->add('Path')
             ->add('type', EntityType::class, [
                 'class' => TypeMedia::class,
-'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
-            ->add('movie', EntityType::class, [
-                'class' => Movie::class,
-'choice_label' => 'id',
-            ])
+            
         ;
     }
 

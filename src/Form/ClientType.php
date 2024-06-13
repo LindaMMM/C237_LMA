@@ -15,15 +15,14 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('FirstName')
             ->add('LastName')
             ->add('Addres')
             ->add('Phone')
-            ->add('FirstName')
             ->add('DateBirth', null, [
                 'widget' => 'single_text',
             ])
             ->add('ValideEmail')
-            ->add('Enable')
             ->add('credit', EntityType::class, [
                 'class' => Credit::class,
 'choice_label' => 'id',

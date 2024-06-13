@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MediaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 class Media
@@ -14,9 +15,13 @@ class Media
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 4)]
     private ?string $Name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 4)]
     private ?string $Path = null;
 
     #[ORM\ManyToOne]
@@ -26,11 +31,9 @@ class Media
     #[ORM\ManyToOne(inversedBy: 'medias')]
     private ?Movie $movie = null;
 
-    public function __construct($name, $path, $type)
+    public function __construct()
     {
-        $this->setName($name);
-        $this->setPath($path);
-        $this->setType($type);
+        
     }
 
     public function getId(): ?int

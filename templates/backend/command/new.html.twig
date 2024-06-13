@@ -1,0 +1,13 @@
+{% extends 'base-backend.html.twig' %}
+
+{% set title = 'Command index'%}
+
+{% block title %}New Command{% endblock %}
+
+{% block content %}
+    <h1>Create new Command</h1>
+
+    {{ include('backend/command/_form.html.twig') }}
+
+    <a href="{{ path('app_command_index') }}">back to list</a>
+{% endblock %}

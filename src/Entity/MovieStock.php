@@ -26,9 +26,9 @@ class MovieStock
     #[ORM\Column]
     private ?int $stockReserved = null;
 
-    public function __construct($stIn)
+    public function __construct()
     {
-        $this->setStockIn($stIn);
+        $this->setStockIn(0);
         $this->setStockOut(0);
         $this->setStockReserved(0);
     }

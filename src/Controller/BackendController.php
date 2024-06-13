@@ -32,7 +32,7 @@ class BackendController extends AbstractController
     }
     public function movies() 
     {
-        return $this->render('backend/index.html.twig', [
+        return $this->render('backend/indexmovies.html.twig', [
             'controller_name' => 'BackendController',
             'title' => 'Film',
         ]);
@@ -40,8 +40,9 @@ class BackendController extends AbstractController
 
     public function users() 
     {
-        return $this->render('backend/index.html.twig', [
+        return $this->render('backend/indexusers.html.twig', [
             'controller_name' => 'BackendController',
+            'title' => 'Utilisateur',
         ]);
     }
 

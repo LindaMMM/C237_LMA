@@ -42,7 +42,17 @@ class MovieRepository extends ServiceEntityRepository
         */
     }
 
+    public function findMovieall():array
+    {
+        return $this->createQueryBuilder('m')
+                ->select('NEW App\\DTO\\MovieWithStock(m.id, m.name, s.stockIn, s.stockOut, s.stockReserved )')
+                ->leftJoin('m.movieStock', 's')
+                ->groupBy('m.id')
+                ->getQuery()
+                ->getResult();
 
+    }
+    
     public function findMovieById($title, $minYear, $genre): ?Movie
     {
         /*$dql = "SELECT b.id, b.title, b.publicationDate, b.pages,  
@@ -66,6 +76,7 @@ class MovieRepository extends ServiceEntityRepository
         */
         return null;
     }
+
     //    /**
     //     * @return Movie[] Returns an array of Movie objects
     //     */

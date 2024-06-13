@@ -1,0 +1,13 @@
+{% extends 'backend/indextypes.html.twig' %}
+
+{% set title = "Genre " %}
+
+{% block type %}
+    <h1>Edit Genre</h1>
+
+    {{ include('backend/genre/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_genre_index') }}">back to list</a>
+
+    {{ include('backend/genre/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'backend/indextypes.html.twig' %}
+
+{% set title = "new " %}
+
+{% block type %}
+    <h1>Create new Genre</h1>
+
+    {{ include('backend/genre/_form.html.twig') }}
+
+    <a href="{{ path('app_genre_index') }}">back to list</a>
+{% endblock %}

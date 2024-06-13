@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\MovieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,6 +25,7 @@ class Movie
     private ?string $Summary = null;
 
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'movie', cascade: ['persist', 'remove'])]
+    #[Assert\Valid]
     private Collection $medias;
 
     #[ORM\OneToOne(mappedBy: 'movie', cascade: ['persist', 'remove'])]
