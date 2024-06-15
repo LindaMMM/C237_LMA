@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
+use App\Form\RegistrationClientFormType;
 use App\Security\EmailVerifier;
 use App\Security\LogInFormAuthentificatorAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,6 +24,20 @@ class RegistrationController extends AbstractController
 {
     public function __construct(private EmailVerifier $emailVerifier)
     {
+
+    }
+
+
+    #[Route('/newclient', name: 'app_register_client')]
+    public function register_client(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
+    {
+        $client = new Client();
+        $form = $this->createForm(RegistrationClientFormType::class, $client);
+        $form->handleRequest($request);
+
+        return $this->render('registration/registerclient.html.twig', [
+            'registrationFormclient' => $form,
+        ]);
     }
 
     #[Route('/register', name: 'app_register')]
