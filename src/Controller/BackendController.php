@@ -5,13 +5,14 @@ use App\Security\PostVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_ADMIN')]
 class BackendController extends AbstractController
 {
     #[Route('/backend', name: 'app_backend')]
     public function index(): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         return $this->render('backend/index.html.twig', [
             'controller_name' => 'BackendController',
             'title' => 'Acceuil',

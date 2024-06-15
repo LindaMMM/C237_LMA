@@ -168,6 +168,12 @@ class AppFixtures extends Fixture
       
         // 
         // Users
+        $user = new Utilisateur();
+        $user->setEmail("john@doe.fr")
+        ->setPassword($this->passwordEncoder->hashPassword($user,'0000'))
+        ->setRoles(['ROLE_ADMIN']);
+        $manager->persist($user);
+        $manager->flush();
         /*$user_fabien_admin = new Utilisateur();
         $user_fabien_admin->setEmail("fabien@admin");
         $user_fabien_admin->setRoles(['ROLE_ADMIN']);
