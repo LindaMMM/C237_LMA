@@ -25,6 +25,9 @@ showMovieDetails:
    requirements:
        id: '[1-9]+[0-9]*'
 # Backend ###
+homeBackend:
+   path: /backend
+   controller: App\Controller\vt
 
 movies:
    path: /admin/movies

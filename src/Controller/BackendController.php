@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Controller;
-
+use App\Security\PostVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted('ROLE_ADMIN')]
 class BackendController extends AbstractController
 {
     #[Route('/backend', name: 'app_backend')]

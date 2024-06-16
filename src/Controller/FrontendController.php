@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,24 +19,17 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Symfony\Component\Validator\Constraints\Lenth;
 use App\Entity\Movie;
+use App\Entity\Utilisateur;
 
 class FrontendController extends AbstractController
 {
     #[Route('/')]
-    public function index(): Response
+    public function index(EntityManagerInterface $em,UserPasswordHasherInterface $hacher): Response
     {  
-        $movinumber = 5;
-        $mymovie = [
-            'id'=>intval(25),
-            'name'=>'USS LeafyCruise',
-            'class'=>'Garden',
-            'captain'=>'Jean-luc Pickles',
-            'status'=>'construction'];
-
         return $this->render('frontend/index.html.twig', [
             'controller_name' => 'FrontendController',
-            'movienumber'=> $movinumber,
-            'mymovie'=> $mymovie,
+            'isconnected'=>$this->getUser()!=NULL,
+            
         ]);
     }
 
