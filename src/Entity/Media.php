@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MediaRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 class Media
@@ -33,7 +34,6 @@ class Media
 
     public function __construct()
     {
-        
     }
 
     public function getId(): ?int

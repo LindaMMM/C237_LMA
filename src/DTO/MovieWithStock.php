@@ -11,6 +11,5 @@ class MovieWithStock
         public readonly int $stockOut,
         public readonly int $stockReserve,
     ) {
-
     }
 }

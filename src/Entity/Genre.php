@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\GenreRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 #[ORM\Entity(repositoryClass: GenreRepository::class)]
 class Genre
 {
@@ -22,7 +25,6 @@ class Genre
     }
     public function __construct()
     {
-        
     }
 
     public function getName(): ?string

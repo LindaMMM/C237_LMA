@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Repository\MovieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
+#[UniqueEntity(fields: ['name'], message: 'Ce film existe déjà.')]
 class Movie
 {
     #[ORM\Id]
@@ -38,9 +40,9 @@ class Movie
     private ?\DateTimeInterface $DateSortie = null;
 
     #[ORM\ManyToMany(targetEntity: "Genre")]
-    #[ORM\JoinTable(name:"movie_genre")]
-    #[ORM\JoinColumn(name:"movie_id", referencedColumnName: "id")]
-    #[ORM\InverseJoinColumn(name:"genre_id", referencedColumnName: "id")]
+    #[ORM\JoinTable(name: "movie_genre")]
+    #[ORM\JoinColumn(name: "movie_id", referencedColumnName: "id")]
+    #[ORM\InverseJoinColumn(name: "genre_id", referencedColumnName: "id")]
     private Collection $genres;
 
     #[ORM\Column]
@@ -52,7 +54,7 @@ class Movie
         $this->emprunts = new ArrayCollection();
         $this->genres = new ArrayCollection();
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;

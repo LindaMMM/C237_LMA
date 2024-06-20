@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\TypeMediaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: TypeMediaRepository::class)]
 class TypeMedia
@@ -21,7 +23,6 @@ class TypeMedia
 
     public function __construct()
     {
-        
     }
 
     public function getId(): ?int

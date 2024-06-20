@@ -28,7 +28,7 @@ class MovieStock
 
     public function __construct()
     {
-        $this->setStockIn(0);
+        $this->setStockIn(1);
         $this->setStockOut(0);
         $this->setStockReserved(0);
     }

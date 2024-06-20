@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% set title = 'Movie' %}
+
+{% block content %}
+    <h1>Movie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ movie.name }}</td>
+            </tr>
+            <tr>
+                <th>Summary</th>
+                <td>{{ movie.Summary }}</td>
+            </tr>
+            <tr>
+                <th>DateSortie</th>
+                <td>{{ movie.DateSortie ? movie.DateSortie|date('Y-m-d') : '' }}</td>
+            </tr>
+           
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_movie_index') }}">back to list</a>
+
+    <a href="{{ path('app_user_add_basket', {'id': movie.id}) }}">add</a>
+
+  
+{% endblock %}

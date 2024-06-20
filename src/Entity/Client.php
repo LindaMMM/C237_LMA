@@ -8,6 +8,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 class Client
 {
@@ -17,12 +20,39 @@ class Client
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $LastName = null;
+    #[Assert\NotBlank]
+    #[Assert\Regex(
+        pattern: '^(\d{1,4})\s?(bis|ter(?=))?\s(rue|avenue|boulevard|allee|chemin)\s(([[:alpha:]]+\s){1,4})(\d{5})\s(([[:alpha:]]+){1,4})',
+        match: true,
+        message: "L'adresse n'est pas valide",
+    )]
+    private ?string $lastName = null;
+
+    #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\Regex(
+        pattern: '^(\d{1,4})\s?(bis|ter(?=))?\s(rue|avenue|boulevard|allee|chemin)\s(([[:alpha:]]+\s){1,4})(\d{5})\s(([[:alpha:]]+){1,4})',
+        match: true,
+        message: "L'adresse n'est pas valide",
+    )]
+    private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Addres = null;
+    #[Assert\NotBlank]
+    #[Assert\Regex(
+        pattern: '^(\d{1,4})\s?(bis|ter(?=))?\s(rue|avenue|boulevard|allee|chemin)\s(([[:alpha:]]+\s){1,4})(\d{5})\s(([[:alpha:]]+){1,4})',
+        match: true,
+        message: "L'adresse n'est pas valide",
+    )]
+    private ?string $addres = null;
 
     #[ORM\Column(length: 12)]
+    #[Assert\NotBlank]
+    #[Assert\Regex(
+        pattern: '^(0|\+33)([1-7]{1})[0-9]{8}',
+        match: true,
+        message: "Le numéro ne respecte pas le format des numéros.",
+    )]
     private ?string $Phone = null;
 
     #[ORM\OneToOne(mappedBy: 'client', cascade: ['persist', 'remove'])]
@@ -34,17 +64,12 @@ class Client
     #[ORM\OneToMany(targetEntity: Command::class, mappedBy: 'client')]
     private Collection $commands;
 
-    #[ORM\Column(length: 50)]
-    private ?string $FirstName = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $DateBirth = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $ValideEmail = null;
+    private ?\DateTimeInterface $dateBirth = null;
 
     #[ORM\Column]
-    private ?bool $Enable = null;
+    private ?bool $enable = true;
 
     public function __construct()
     {
@@ -58,24 +83,24 @@ class Client
 
     public function getLastName(): ?string
     {
-        return $this->LastName;
+        return $this->lastName;
     }
 
     public function setLastName(string $Name): static
     {
-        $this->LastName = $Name;
+        $this->lastName = $Name;
 
         return $this;
     }
 
     public function getAddres(): ?string
     {
-        return $this->Addres;
+        return $this->addres;
     }
 
     public function setAddres(string $Addres): static
     {
-        $this->Addres = $Addres;
+        $this->addres = $Addres;
 
         return $this;
     }
@@ -158,48 +183,36 @@ class Client
 
     public function getFirstName(): ?string
     {
-        return $this->FirstName;
+        return $this->firstName;
     }
 
     public function setFirstName(string $FirstName): static
     {
-        $this->FirstName = $FirstName;
+        $this->firstName = $FirstName;
 
         return $this;
     }
 
     public function getDateBirth(): ?\DateTimeInterface
     {
-        return $this->DateBirth;
+        return $this->dateBirth;
     }
 
     public function setDateBirth(\DateTimeInterface $DateBirth): static
     {
-        $this->DateBirth = $DateBirth;
-
-        return $this;
-    }
-
-    public function getValideEmail(): ?string
-    {
-        return $this->ValideEmail;
-    }
-
-    public function setValideEmail(string $ValideEmail): static
-    {
-        $this->ValideEmail = $ValideEmail;
+        $this->dateBirth = $DateBirth;
 
         return $this;
     }
 
     public function isEnable(): ?bool
     {
-        return $this->Enable;
+        return $this->enable;
     }
 
-    public function setEnable(?bool $Enable): static
+    public function setEnable(?bool $enable): static
     {
-        $this->Enable = $Enable;
+        $this->enable = $enable;
 
         return $this;
     }

@@ -24,29 +24,28 @@ class MovieType extends AbstractType
             ])
             ->add('Enable')
             ->add('movieStock', EntityType::class, [
-                'class' => MovieStock::class, 
+                'class' => MovieStock::class,
                 'choice_label' => 'id',
             ])
-            
+
             ->add('genres', EntityType::class, [
                 'class' => Genre::class,
-'choice_label' => 'name',
-'multiple' => true,
+                'choice_label' => 'name',
+                'multiple' => true,
             ])
             ->add('medias', CollectionType::class, [
                 'entry_type' => MediaType::class,
-                'by_reference'=> false,
+                'by_reference' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'entry_options' => ['label'=> false],
-                'attr' =>[
+                'entry_options' => ['label' => false],
+                'attr' => [
                     'data-controller' => 'form-collection',
                     'data-form-collection-add-label-value' => 'Ajouter un média',
                     'data-form-collection-delete-label-value' => 'Suprimer un média',
                 ]
             ])
-            ->add('save', SubmitType::class,['label'=> 'envoyer'])
-        ;
+            ->add('save', SubmitType::class, ['label' => 'envoyer']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
