@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Nouveau Client{% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        <div class="text-red-600 dark:text-red-500" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
     <h1>Nouveau Client</h1>

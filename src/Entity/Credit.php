@@ -3,9 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\CreditRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -18,13 +18,18 @@ class Credit
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $Quantite = null;
+    private int $quantite = 0;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $DateUpdate = null;
+    private ?\DateTimeInterface $dateUpdate = null;
 
     #[ORM\OneToOne(inversedBy: 'credit', cascade: ['persist', 'remove'])]
     private ?Client $client = null;
+
+    public function __construct()
+    {
+        $this->dateUpdate = new DateTime("now");
+    }
 
     public function getId(): ?int
     {
@@ -33,24 +38,24 @@ class Credit
 
     public function getQuantite(): ?int
     {
-        return $this->Quantite;
+        return $this->quantite;
     }
 
-    public function setQuantite(int $Quantite): static
+    public function setQuantite(int $quantite): static
     {
-        $this->Quantite = $Quantite;
+        $this->quantite = $quantite;
 
         return $this;
     }
 
     public function getDateUpdate(): ?\DateTimeInterface
     {
-        return $this->DateUpdate;
+        return $this->dateUpdate;
     }
 
     public function setDateUpdate(\DateTimeInterface $DateUpdate): static
     {
-        $this->DateUpdate = $DateUpdate;
+        $this->dateUpdate = $DateUpdate;
 
         return $this;
     }

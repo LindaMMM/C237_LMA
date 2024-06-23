@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_REF', fields: ['reference'])]
+#[UniqueEntity(fields: ['reference'], message: 'Cette référence existe déjà.')]
 class Command
 {
     #[ORM\Id]
@@ -20,16 +22,18 @@ class Command
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $Reference = null;
+    #[ORM\GeneratedValue(strategy: 'SEQUENCE')]
+    #[ORM\SequenceGenerator(sequenceName: 'message_seq', initialValue: 59000000)]
+    private ?string $reference = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $DateCommande = null;
+    private ?\DateTimeInterface $dateCommande = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $DateExpedie = null;
+    private ?\DateTimeInterface $dateExpedie = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $DateRetour = null;
+    private ?\DateTimeInterface $dateRetour = null;
 
     #[ORM\OneToMany(targetEntity: Emprunt::class, mappedBy: 'command')]
     private Collection $emprunt;
@@ -50,48 +54,48 @@ class Command
 
     public function getReference(): ?string
     {
-        return $this->Reference;
+        return $this->reference;
     }
 
-    public function setReference(string $Reference): static
+    public function setReference(string $reference): static
     {
-        $this->Reference = $Reference;
+        $this->reference = $reference;
 
         return $this;
     }
 
     public function getDateCommande(): ?\DateTimeInterface
     {
-        return $this->DateCommande;
+        return $this->dateCommande;
     }
 
-    public function setDateCommande(\DateTimeInterface $DateCommande): static
+    public function setDateCommande(\DateTimeInterface $dateCommande): static
     {
-        $this->DateCommande = $DateCommande;
+        $this->dateCommande = $dateCommande;
 
         return $this;
     }
 
     public function getDateExpedie(): ?\DateTimeInterface
     {
-        return $this->DateExpedie;
+        return $this->dateExpedie;
     }
 
-    public function setDateExpedie(\DateTimeInterface $DateExpedie): static
+    public function setDateExpedie(\DateTimeInterface $dateExpedie): static
     {
-        $this->DateExpedie = $DateExpedie;
+        $this->dateExpedie = $dateExpedie;
 
         return $this;
     }
 
     public function getDateRetour(): ?\DateTimeInterface
     {
-        return $this->DateRetour;
+        return $this->dateRetour;
     }
 
-    public function setDateRetour(\DateTimeInterface $DateRetour): static
+    public function setDateRetour(\DateTimeInterface $dateRetour): static
     {
-        $this->DateRetour = $DateRetour;
+        $this->dateRetour = $dateRetour;
 
         return $this;
     }

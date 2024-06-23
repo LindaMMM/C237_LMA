@@ -14,21 +14,20 @@ class CommandType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Reference')
-            ->add('DateCommande', null, [
+            ->add('reference')
+            ->add('dateCommande', null, [
                 'widget' => 'single_text',
             ])
             ->add('DateExpedie', null, [
                 'widget' => 'single_text',
             ])
-            ->add('DateRetour', null, [
+            ->add('dateRetour', null, [
                 'widget' => 'single_text',
             ])
             ->add('client', EntityType::class, [
                 'class' => Client::class,
-'choice_label' => 'id',
-            ])
-        ;
+                'choice_label' => 'id',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

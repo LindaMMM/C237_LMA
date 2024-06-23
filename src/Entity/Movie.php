@@ -21,10 +21,26 @@ class Movie
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Type("string")]
+    #[Assert\NotBlank(message: "Le nom ne peut pas être vide")]
+    #[Assert\Length(
+        max: 100,
+        maxMessage: "Le nom doit compter au plus {{ limit }} caractères.",
+        min: 2,
+        minMessage: "Le nom doit compter au moins {{ limit }} caractères."
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 2000)]
-    private ?string $Summary = null;
+    #[Assert\Type("string")]
+    #[Assert\NotBlank(message: "La description ne peut pas être vide")]
+    #[Assert\Length(
+        max: 2000,
+        maxMessage: "La description doit compter au plus {{ limit }} caractères.",
+        min: 2,
+        minMessage: "La description doit compter au moins {{ limit }} caractères."
+    )]
+    private ?string $summary = null;
 
     #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'movie', cascade: ['persist', 'remove'])]
     #[Assert\Valid]
@@ -37,7 +53,8 @@ class Movie
     private Collection $emprunts;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $DateSortie = null;
+    #[Assert\LessThan('today')]
+    private ?\DateTimeInterface $dateSortie = null;
 
     #[ORM\ManyToMany(targetEntity: "Genre")]
     #[ORM\JoinTable(name: "movie_genre")]
@@ -46,7 +63,7 @@ class Movie
     private Collection $genres;
 
     #[ORM\Column]
-    private ?bool $Enable = null;
+    private bool $enable = true;
 
     public function __construct()
     {
@@ -65,21 +82,21 @@ class Movie
         return $this->name;
     }
 
-    public function setName(string $Name): static
+    public function setName(string $name): static
     {
-        $this->name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getSummary(): ?string
     {
-        return $this->Summary;
+        return $this->summary;
     }
 
-    public function setSummary(string $Summary): static
+    public function setSummary(string $summary): static
     {
-        $this->Summary = $Summary;
+        $this->summary = $summary;
 
         return $this;
     }
@@ -163,12 +180,12 @@ class Movie
 
     public function getDateSortie(): ?\DateTimeInterface
     {
-        return $this->DateSortie;
+        return $this->dateSortie;
     }
 
-    public function setDateSortie(\DateTimeInterface $DateSortie): static
+    public function setDateSortie(\DateTimeInterface $dateSortie): static
     {
-        $this->DateSortie = $DateSortie;
+        $this->dateSortie = $dateSortie;
 
         return $this;
     }
@@ -197,14 +214,14 @@ class Movie
         return $this;
     }
 
-    public function isEnable(): ?bool
+    public function isEnable(): bool
     {
-        return $this->Enable;
+        return $this->enable;
     }
 
-    public function setEnable(bool $Enable): static
+    public function setEnable(bool $enable): static
     {
-        $this->Enable = $Enable;
+        $this->enable = $enable;
 
         return $this;
     }

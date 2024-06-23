@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Test\Controller;
+namespace App\Test\Admin\Controller;
 
 use App\Entity\TypeMedia;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,7 +13,7 @@ class TypeMediaControllerTest extends WebTestCase
     private KernelBrowser $client;
     private EntityManagerInterface $manager;
     private EntityRepository $repository;
-    private string $path = '/type/media/';
+    private string $path = '/admin/type/media';
 
     protected function setUp(): void
     {
@@ -47,8 +47,8 @@ class TypeMediaControllerTest extends WebTestCase
         self::assertResponseStatusCodeSame(200);
 
         $this->client->submitForm('Save', [
-            'type_media[Code]' => 'Testing',
-            'type_media[Name]' => 'Testing',
+            'type_media[code]' => 'Testing',
+            'type_media[name]' => 'Testing',
         ]);
 
         self::assertResponseRedirects($this->path);
@@ -87,8 +87,8 @@ class TypeMediaControllerTest extends WebTestCase
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
         $this->client->submitForm('Update', [
-            'type_media[Code]' => 'Something New',
-            'type_media[Name]' => 'Something New',
+            'type_media[code]' => 'Something New',
+            'type_media[name]' => 'Something New',
         ]);
 
         self::assertResponseRedirects('/type/media/');

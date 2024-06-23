@@ -18,11 +18,11 @@ class MovieType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('Summary')
-            ->add('DateSortie', null, [
+            ->add('summary')
+            ->add('dateSortie', null, [
                 'widget' => 'single_text',
             ])
-            ->add('Enable')
+            ->add('enable')
             ->add('movieStock', EntityType::class, [
                 'class' => MovieStock::class,
                 'choice_label' => 'id',
@@ -33,6 +33,7 @@ class MovieType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
             ])
+
             ->add('medias', CollectionType::class, [
                 'entry_type' => MediaType::class,
                 'by_reference' => false,

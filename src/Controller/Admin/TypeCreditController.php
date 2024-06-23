@@ -39,7 +39,7 @@ class TypeCreditController extends AbstractController
         }
 
         return $this->render('backend/type_credit/new.html.twig', [
-            'TypeCredit' => $typeCredit,
+            'type_credit' => $typeCredit,
             'form' => $form,
         ]);
     }
@@ -48,7 +48,7 @@ class TypeCreditController extends AbstractController
     public function show(TypeCredit $typeCredit): Response
     {
         return $this->render('backend/type_credit/show.html.twig', [
-            'TypeCredit' => $typeCredit,
+            'type_credit' => $typeCredit,
         ]);
     }
 
@@ -60,21 +60,21 @@ class TypeCreditController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('sucess','Le TypeCredit a été modifié');
+            $this->addFlash('sucess', 'Le TypeCredit a été modifié');
             return $this->redirectToRoute('app_type_credit_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('backend/type_credit/edit.html.twig', [
-            'TypeCredit' => $typeCredit,
+            'type_credit' => $typeCredit,
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}', name: 'app_type_credit_delete', methods: ['POST'])]
-    public function delete(Request $request, TypeCredit $TypeCredit, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, TypeCredit $typeCredit, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$TypeCredit->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($TypeCredit);
+        if ($this->isCsrfTokenValid('delete' . $typeCredit->getId(), $request->getPayload()->get('_token'))) {
+            $entityManager->remove($typeCredit);
             $entityManager->flush();
         }
 

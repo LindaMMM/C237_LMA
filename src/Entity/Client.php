@@ -7,9 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 class Client
@@ -20,36 +18,59 @@ class Client
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank]
+    #[Assert\Type("string")]
+    #[Assert\NotBlank(message: "Le nom ne peut pas être vide")]
+    #[Assert\Length(
+        max: 50,
+        maxMessage: "Le nom doit compter au plus {{ limit }} caractères.",
+        min: 2,
+        minMessage: "Le nom doit compter au moins {{ limit }} caractères."
+    )]
     #[Assert\Regex(
-        pattern: '^(\d{1,4})\s?(bis|ter(?=))?\s(rue|avenue|boulevard|allee|chemin)\s(([[:alpha:]]+\s){1,4})(\d{5})\s(([[:alpha:]]+){1,4})',
+        pattern: '/\w+/',
         match: true,
-        message: "L'adresse n'est pas valide",
+        message: "Le nom n'a pas le bon format.",
     )]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank]
+    #[Assert\Type("string")]
+    #[Assert\NotBlank(message: "Le prénom ne peut pas être vide")]
+    #[Assert\Length(
+        max: 50,
+        maxMessage: "Le prénom doit compter au plus {{ limit }} caractères.",
+        min: 2,
+        minMessage: "Le prénom doit compter au moins {{ limit }} caractères."
+    )]
     #[Assert\Regex(
-        pattern: '^(\d{1,4})\s?(bis|ter(?=))?\s(rue|avenue|boulevard|allee|chemin)\s(([[:alpha:]]+\s){1,4})(\d{5})\s(([[:alpha:]]+){1,4})',
+        pattern: '/^[a-z]+$/i',
+        htmlPattern: '^[a-zA-Z]+$',
         match: true,
-        message: "L'adresse n'est pas valide",
+        message: "Le prénom n'a pas le bon format.",
     )]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Type("string")]
     #[Assert\NotBlank]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: "L'adresse doit compter au plus {{ limit }} caractères.",
+        min: 2,
+        minMessage: "L'adresse' doit compter au moins {{ limit }} caractères."
+    )]
     #[Assert\Regex(
-        pattern: '^(\d{1,4})\s?(bis|ter(?=))?\s(rue|avenue|boulevard|allee|chemin)\s(([[:alpha:]]+\s){1,4})(\d{5})\s(([[:alpha:]]+){1,4})',
+        pattern: '/^(\d{1,4})\s?(bis|ter(?=))?\s(rue|avenue|boulevard|allee|chemin)\s(([[:alpha:]]+\s){1,4})(\d{5})\s(([[:alpha:]]+){1,4})/',
         match: true,
         message: "L'adresse n'est pas valide",
     )]
     private ?string $addres = null;
 
     #[ORM\Column(length: 12)]
+    #[Assert\Type("string")]
     #[Assert\NotBlank]
     #[Assert\Regex(
-        pattern: '^(0|\+33)([1-7]{1})[0-9]{8}',
+        pattern: '/^(0|(\+)33)([1-7]{1})[0-9]{8}/',
         match: true,
         message: "Le numéro ne respecte pas le format des numéros.",
     )]

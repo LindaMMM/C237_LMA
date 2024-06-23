@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\MediaRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 class Media
@@ -16,14 +15,25 @@ class Media
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank]
-    #[Assert\Length(min: 4)]
-    private ?string $Name = null;
+    #[Assert\Type("string")]
+    #[Assert\NotBlank(message: "Le nom ne peut pas être vide")]
+    #[Assert\Length(
+        max: 50,
+        maxMessage: "Le nom doit compter au plus {{ limit }} caractères.",
+        min: 2,
+        minMessage: "Le nom doit compter au moins {{ limit }} caractères."
+    )]
+    #[Assert\Regex(
+        pattern: '[[:alpha:]]+',
+        match: true,
+        message: "Le nom n'a pas le bon format.",
+    )]
+    private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 4)]
-    private ?string $Path = null;
+    private ?string $path = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -43,24 +53,24 @@ class Media
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): static
+    public function setName(string $name): static
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getPath(): ?string
     {
-        return $this->Path;
+        return $this->path;
     }
 
-    public function setPath(string $Path): static
+    public function setPath(string $path): static
     {
-        $this->Path = $Path;
+        $this->path = $path;
 
         return $this;
     }

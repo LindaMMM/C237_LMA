@@ -15,14 +15,12 @@ class MediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Name')
-            ->add('Path')
+            ->add('name')
+            ->add('path')
             ->add('type', EntityType::class, [
                 'class' => TypeMedia::class,
                 'choice_label' => 'name',
-            ])
-            
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

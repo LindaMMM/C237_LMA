@@ -5,7 +5,7 @@ export default class extends Controller {
     static targets = ["menu", "x", "bars"]
 
     connect() {
-        
+      console.log("navbare")
     }
     toggle() {
         this.stateValue = !this.stateValue

@@ -16,10 +16,10 @@ class TypeMedia
     private ?int $id = null;
 
     #[ORM\Column(length: 5)]
-    private ?string $Code = null;
+    private ?string $code = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $Name = null;
+    private ?string $name = null;
 
     public function __construct()
     {
@@ -32,24 +32,24 @@ class TypeMedia
 
     public function getCode(): ?string
     {
-        return $this->Code;
+        return $this->code;
     }
 
-    public function setCode(string $Code): static
+    public function setCode(string $code): static
     {
-        $this->Code = $Code;
+        $this->code = $code;
 
         return $this;
     }
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): static
+    public function setName(string $name): static
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }

@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/admin/type/media')]
-#[IsGranted('ROLE_ADMIN')]
+// #[IsGranted('ROLE_ADMIN')]
 class TypeMediaController extends AbstractController
 {
     #[Route('/', name: 'app_type_media_index', methods: ['GET'])]
@@ -38,7 +38,7 @@ class TypeMediaController extends AbstractController
             return $this->redirectToRoute('app_type_media_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('backend/TypeMedia/new.html.twig', [
+        return $this->render('backend/type_media/new.html.twig', [
             'type_media' => $typeMedia,
             'form' => $form,
         ]);
@@ -47,7 +47,7 @@ class TypeMediaController extends AbstractController
     #[Route('/{id}', name: 'app_type_media_show', methods: ['GET'])]
     public function show(TypeMedia $typeMedia): Response
     {
-        return $this->render('backend/TypeMedia/show.html.twig', [
+        return $this->render('backend/type_media/show.html.twig', [
             'type_media' => $typeMedia,
         ]);
     }
@@ -60,11 +60,11 @@ class TypeMediaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-            $this->addFlash('sucess','Le typeMedia a été modifié');
+            $this->addFlash('sucess', 'Le typeMedia a été modifié');
             return $this->redirectToRoute('app_type_media_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('backend/TypeMedia/edit.html.twig', [
+        return $this->render('backend/type_media/edit.html.twig', [
             'type_media' => $typeMedia,
             'form' => $form,
         ]);
@@ -73,7 +73,7 @@ class TypeMediaController extends AbstractController
     #[Route('/{id}', name: 'app_type_media_delete', methods: ['POST'])]
     public function delete(Request $request, TypeMedia $typeMedia, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$typeMedia->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $typeMedia->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($typeMedia);
             $entityManager->flush();
         }

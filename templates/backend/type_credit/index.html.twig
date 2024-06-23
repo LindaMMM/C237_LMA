@@ -20,9 +20,9 @@
         {% for type_credit in type_credits %}
             <tr>
                 <td>{{ type_credit.id }}</td>
-                <td>{{ type_credit.Name }}</td>
-                <td>{{ type_credit.Prix }}</td>
-                <td>{{ type_credit.NbCredit }}</td>
+                <td>{{ type_credit.name }}</td>
+                <td>{{ type_credit.prix }}</td>
+                <td>{{ type_credit.nbCredit }}</td>
                 <td>{{ type_credit.Enable ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_type_credit_show', {'id': type_credit.id}) }}">show</a>

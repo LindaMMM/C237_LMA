@@ -12,9 +12,8 @@ class TypeMediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Code')
-            ->add('Name')
-        ;
+            ->add('code')
+            ->add('name');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

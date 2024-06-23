@@ -4,12 +4,14 @@ namespace App\Form;
 
 use App\Entity\Client;
 
-use App\Entity\Utilisateur;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 
 class RegistrationClientFormType extends AbstractType
 {
@@ -17,17 +19,16 @@ class RegistrationClientFormType extends AbstractType
     {
 
         $builder
-            ->add('FirstName')
-            ->add('LastName')
-            ->add('Addres')
-            ->add('Phone')
-            ->add('DateBirth', null, [
-                'widget' => 'single_text',
+            ->add('firstName', TextType::class, ['label' => 'Prénom'])
+            ->add('lastName', TextType::class, ['label' => 'Nom'])
+            ->add('addres', TextType::class, ['label' => 'Adresse'])
+            ->add('phone', TelType::class, ['label' => 'Numéro de téléphone'])
+            ->add('dateBirth', null, [
+                'widget' => 'single_text', 'label' => 'Date de naissance'
             ])
-            ->add('ValideEmail')
-            ->add('Enable', null, ['value' => true, 'label' => 'Activer'])
+            ->add('enable', HiddenType::class, ['label' => 'Activer'])
 
-            ->add('user', RegistrationFormType::class, ['label' => 'Enregister'])
+            ->add('user', RegistrationFormType::class, ['label' => ' '])
             ->add('save', SubmitType::class, ['label' => 'Enregister']);
     }
 

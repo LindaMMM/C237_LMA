@@ -16,16 +16,16 @@ class TypeCredit
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $Name = null;
+    private ?string $name = null;
 
     #[ORM\Column]
-    private ?float $Prix = null;
+    private ?float $prix = null;
 
     #[ORM\Column]
-    private ?int $NbCredit = null;
+    private ?int $nbCredit = null;
 
     #[ORM\Column]
-    private ?bool $Enable = null;
+    private bool $enable = true;
 
     public function __construct()
     {
@@ -37,48 +37,48 @@ class TypeCredit
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): static
+    public function setName(string $name): static
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getPrix(): ?float
     {
-        return $this->Prix;
+        return $this->prix;
     }
 
-    public function setPrix(float $Prix): static
+    public function setPrix(float $prix): static
     {
-        $this->Prix = $Prix;
+        $this->prix = $prix;
 
         return $this;
     }
 
     public function getNbCredit(): ?int
     {
-        return $this->NbCredit;
+        return $this->nbCredit;
     }
 
-    public function setNbCredit(int $NbCredit): static
+    public function setNbCredit(int $nbCredit): static
     {
-        $this->NbCredit = $NbCredit;
+        $this->nbCredit = $nbCredit;
 
         return $this;
     }
 
     public function isEnable(): ?bool
     {
-        return $this->Enable;
+        return $this->enable;
     }
 
-    public function setEnable(bool $Enable): static
+    public function setEnable(bool $enable): static
     {
-        $this->Enable = $Enable;
+        $this->enable = $enable;
 
         return $this;
     }

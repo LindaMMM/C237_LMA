@@ -14,15 +14,14 @@ class CreditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Quantite')
-            ->add('DateUpdate', null, [
+            ->add('quantite')
+            ->add('dateUpdate', null, [
                 'widget' => 'single_text',
             ])
             ->add('client', EntityType::class, [
                 'class' => Client::class,
-'choice_label' => 'id',
-            ])
-        ;
+                'choice_label' => 'id',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

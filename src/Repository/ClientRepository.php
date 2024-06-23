@@ -20,6 +20,7 @@ class ClientRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Client::class);
     }
+
     /**
      * @return Client[] Returns an array of Client objects
      */
@@ -31,7 +32,8 @@ class ClientRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-     /**
+
+    /**
      * @return Client?
      */
     public function getById($id): ?Client
@@ -42,7 +44,7 @@ class ClientRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-    
+
     //    /**
     //     * @return Client[] Returns an array of Client objects
     //     */

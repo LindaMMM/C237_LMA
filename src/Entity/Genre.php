@@ -9,6 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: GenreRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_GENRE', fields: ['name'])]
+#[UniqueEntity(fields: ['name'], message: 'Ce nom existe déjà.')]
 class Genre
 {
     #[ORM\Id]
@@ -17,7 +19,21 @@ class Genre
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $Name = null;
+    #[Assert\Type("string")]
+    #[Assert\NotBlank(message: "Le nom ne peut pas être vide")]
+    #[Assert\Length(
+        max: 50,
+        maxMessage: "Le nom doit compter au plus {{ limit }} caractères.",
+        min: 2,
+        minMessage: "Le nom doit compter au moins {{ limit }} caractères."
+    )]
+    #[Assert\Regex(
+        pattern: '[[:alpha:]]+',
+        match: true,
+        message: "Le nom n'a pas le bon format.",
+    )]
+
+    private ?string $name = null;
 
     public function getId(): ?int
     {
@@ -29,12 +45,12 @@ class Genre
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): static
+    public function setName(string $name): static
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }

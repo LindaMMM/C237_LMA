@@ -6,9 +6,6 @@ use App\Repository\EmpruntRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 #[ORM\Entity(repositoryClass: EmpruntRepository::class)]
 class Emprunt
 {
@@ -18,7 +15,7 @@ class Emprunt
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $DateEmprunt = null;
+    private ?\DateTimeInterface $dateEmprunt = null;
 
     #[ORM\ManyToOne(inversedBy: 'emprunt')]
     private ?Command $command = null;
@@ -36,12 +33,12 @@ class Emprunt
 
     public function getDateEmprunt(): ?\DateTimeInterface
     {
-        return $this->DateEmprunt;
+        return $this->dateEmprunt;
     }
 
-    public function setDateEmprunt(\DateTimeInterface $DateEmprunt): static
+    public function setDateEmprunt(\DateTimeInterface $dateEmprunt): static
     {
-        $this->DateEmprunt = $DateEmprunt;
+        $this->dateEmprunt = $dateEmprunt;
 
         return $this;
     }

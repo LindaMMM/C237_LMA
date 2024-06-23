@@ -12,11 +12,10 @@ class TypeCreditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Name')
-            ->add('Prix')
-            ->add('NbCredit')
-            ->add('Enable')
-        ;
+            ->add('name')
+            ->add('prix')
+            ->add('nbCredit')
+            ->add('enable');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

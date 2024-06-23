@@ -19,7 +19,7 @@ class MovieController extends AbstractController
     #[Route('/', name: 'app_movie_index', methods: ['GET'])]
     public function index(MovieRepository $movieRepository): Response
     {
-        
+
         return $this->render('backend/movie/index.html.twig', [
             'movies' => $movieRepository->findall(),
         ]);
@@ -74,7 +74,7 @@ class MovieController extends AbstractController
     #[Route('/{id}', name: 'app_movie_delete', methods: ['POST'])]
     public function delete(Request $request, Movie $movie, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$movie->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $movie->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($movie);
             $entityManager->flush();
         }

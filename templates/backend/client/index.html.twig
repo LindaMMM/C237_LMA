@@ -9,15 +9,15 @@
             <tr>
                 <th>FirstName</th>
                 <th>LastName</th>
-                <th>ValideEmail</th>
+                <th>Actif</th>
+                <th>action</th>
             </tr>
         </thead>
         <tbody>
         {% for client in clients %}
             <tr>
-                <td>{{ client.FirstName }}</td>
-                <td>{{ client.LastName }}</td>
-                <td>{{ client.ValideEmail }}</td>
+                <td>{{ client.firstName }}</td>
+                <td>{{ client.lastName }}</td>
                 <td>{{ client.Enable ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a>

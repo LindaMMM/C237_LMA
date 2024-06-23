@@ -20,9 +20,9 @@
             <tr>
                 <td>{{ movie.id }}</td>
                 <td>{{ movie.name }}</td>
-                <td>{{ movie.Summary }}</td>
-                <td>{{ movie.DateSortie ? movie.DateSortie|date('Y-m-d') : '' }}</td>
-                <td>{{ movie.Enable ? 'Yes' : 'No' }}</td>
+                <td>{{ movie.summary }}</td>
+                <td>{{ movie.dateSortie ? movie.dateSortie|date('Y-m-d') : '' }}</td>
+                <td>{{ movie.enable ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_movie_show', {'id': movie.id}) }}">show</a>
                     <a href="{{ path('app_movie_edit', {'id': movie.id}) }}">edit</a>
