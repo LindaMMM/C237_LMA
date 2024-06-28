@@ -15,6 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[UniqueEntity(fields: ['name'], message: 'Ce film existe déjà.')]
 class Movie
 {
+    const STATUS_ACTIF = true;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

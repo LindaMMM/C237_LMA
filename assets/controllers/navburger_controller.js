@@ -15,11 +15,12 @@ export default class extends Controller {
     this.btn_menuTarget.addEventListener("click", this.toogleElement);
     this.btn_searchTarget.addEventListener("click", () => {
       this.disableAllMenu();
-      alert("searche");
+      window.location.href = "user/movie/search";
     });
     this.btn_shopTarget.addEventListener("click", () => {
       this.disableAllMenu();
-      alert("shop");
+      // redirect
+      window.location.href = "user/basket";
     });
     this.btn_menuprofilTarget.addEventListener("click", this.toogleElement);
   }

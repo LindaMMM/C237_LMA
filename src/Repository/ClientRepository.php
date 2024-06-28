@@ -45,6 +45,22 @@ class ClientRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    /**
+     * @return Client?
+     */
+    public function findbByUser($user): ?Client
+    {
+        $email = $user->getEmail();
+
+        return $this->createQueryBugitilder('c')
+            ->innerJoin('c.user', 'u')
+            ->andWhere('u.email = :val')
+            ->setParameter('val', $email)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+
     //    /**
     //     * @return Client[] Returns an array of Client objects
     //     */

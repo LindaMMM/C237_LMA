@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * @extends ServiceEntityRepository<Movie>
@@ -20,13 +21,34 @@ class MovieRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Movie::class);
     }
+    public static function createApprovedCriteria(): Criteria
+    {
+        return Criteria::create()
+            ->andWhere(Criteria::expr()->eq('enable', movie::STATUS_ACTIF));
+    }
 
+    public function findMoviesByName(string $search = null): array
+    {
+        $queryBuilder = $this->createQueryBuilder('movie')
+            ->addCriteria(self::createApprovedCriteria())
+            ->orderBy('movie.id', 'DESC');
+        if ($search) {
+            $queryBuilder->andWhere('movie.name LIKE :searchTerm')
+                ->setParameter('searchTerm', '%' . $search . '%');
+            $queryBuilder->orWhere('movie.summary LIKE :searchTerm')
+                ->setParameter('searchTerm', '%' . $search . '%');
+        }
+        return $queryBuilder
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
 
     public function findallenable()
     {
         return $this->createQueryBuilder('m')
             ->leftJoin('m.movieStock', 's')
-            ->where('m.Enable = TRUE')
+            ->where('m.enable = TRUE')
             ->andWhere('s.stockIn > 0')
             ->groupBy('m.id')
             ->getQuery()

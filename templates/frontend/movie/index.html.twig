@@ -2,8 +2,10 @@
 
 {% set title = 'Movie index' %}
 
-{% block content %}
+{% block body %}
     
+
+
     <table class="table">
         <thead>
             <tr>
@@ -20,8 +22,6 @@
                 <td>{{ movie.Summary }}</td>
                 <td>{{ movie.DateSortie ? movie.DateSortie|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_user_movie_show', {'id': movie.id}) }}">show</a>
-                    <a href="{{ path('app_user_add_basket', {'id': movie.id}) }}">add</a>
                 </td>
             </tr>
         {% else %}

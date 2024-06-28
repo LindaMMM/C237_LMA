@@ -20,6 +20,21 @@ class MovieController extends AbstractController
     {
         return $this->render('frontend/movie/index.html.twig', [
             'movies' => $movieRepository->findallenable(),
+            'isconnected' => $this->getUser() != NULL,
         ]);
+    }
+
+    #[Route('/search', name: 'app_search_movie', methods: ['GET'])]
+    public function searchmovie(MovieRepository $movieRepository, Request $request)
+    {
+        $movies = $movieRepository->findMoviesByName(
+            $request->query->get('m')
+        );
+        return $this->render('frontend/movie/search.html.twig', [
+            'txtsearch' => $request->query->get('m'),
+            'movies' => $movies,
+            'isconnected' => $this->getUser() != NULL,
+        ]);
+        dd($movies);
     }
 }
