@@ -33,6 +33,15 @@ class ClientRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getByUserId($user): ?Client
+    {
+        return $this->createQueryBuilder('c')
+        ->innerJoin('c.user', 'u')
+        ->andWhere('u.id = :idval')
+        ->setParameter('idval', $user->getId())
+        ->getQuery()
+        ->getOneOrNullResult();
+    }
     /**
      * @return Client?
      */

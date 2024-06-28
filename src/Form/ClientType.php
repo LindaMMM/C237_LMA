@@ -9,27 +9,33 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 
 class ClientType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('addres')
-            ->add('phone')
+            ->add('firstName', TextType::class, ['label' => 'Prénom'])
+            ->add('lastName', TextType::class, ['label' => 'Nom'])
+            ->add('addres', TextType::class, ['label' => 'Adresse'])
+            ->add('phone', TelType::class, ['label' => 'Numéro de téléphone'])
             ->add('dateBirth', null, [
-                'widget' => 'single_text',
+                'widget' => 'single_text', 'label' => 'Date de naissance'
             ])
+            ->add('enable', HiddenType::class, ['label' => 'Activer'])
             ->add('credit', EntityType::class, [
                 'class' => Credit::class,
-                'choice_label' => 'id',
+                'choice_label' => 'quantite',
+                'disabled' => true
             ])
-            ->add('user', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'id',
-            ]);
+            ->add('save', SubmitType::class, ['label' => 'envoyer']);
+          
+          
     }
 
     public function configureOptions(OptionsResolver $resolver): void

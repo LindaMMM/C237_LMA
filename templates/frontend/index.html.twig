@@ -3,34 +3,6 @@
 
 {% set title = "Accueil" %} 
 
-      
 {% block content %}
-
-<h2>{{mymovie.id}}</h2> 
-
-<a href="{{ path('app_test_show', {id: mymovie.id})}}"> movie</a>
-
-   <p>Nombre de film {{movienumber}}</p>
-   <div>
-      
-      <table>
-         <tr>
-            <td>Name</td>
-            <td>{{mymovie.name}}</td>
-         </tr>
-          <tr>
-            <td>Classe</td>
-            <td>{{mymovie.class}}</td>
-         </tr>
-          <tr>
-            <td>Captain</td>
-            <td>{{mymovie.captain|upper|lower|title}}</td>
-         </tr>
-          <tr>
-            <td>Status</td>
-            <td>{{mymovie.status}}</td>
-         </tr>
-      </table>
-   </div>
    <p>Bienvenue sur notre site !</p>
 {% endblock %}

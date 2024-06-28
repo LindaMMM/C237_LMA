@@ -2,7 +2,7 @@
 
 {% block title %}Nouveau Client{% endblock %}
 
-{% block body %}
+{% block content %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="text-red-600 dark:text-red-500" role="alert">{{ flash_error }}</div>
     {% endfor %}
