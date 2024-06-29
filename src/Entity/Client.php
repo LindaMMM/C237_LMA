@@ -72,7 +72,7 @@ class Client
     #[Assert\Regex(
         pattern: '/^(0|(\+)33)([1-7]{1})[0-9]{8}/',
         match: true,
-        message: "Le numéro ne respecte pas le format des numéros.",
+        message: "Le numéro de téléphone ne respecte pas le format.",
     )]
     private ?string $Phone = null;
 

@@ -3,8 +3,7 @@
 {% set title ='Client' %}
 
 {% block content %}
-    <h1>Client</h1>
-
+    
     <table class="table">
         <tbody>
             <tr>
@@ -31,10 +30,7 @@
                 <th>DateBirth</th>
                 <td>{{ client.dateBirth ? client.dateBirth|date('Y-m-d') : '' }}</td>
             </tr>
-            <tr>
-                <th>valideEmail</th>
-                <td>{{ client.valideEmail }}</td>
-            </tr>
+           
             <tr>
                 <th>Enable</th>
                 <td>{{ client.enable ? 'Yes' : 'No' }}</td>
@@ -42,9 +38,12 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_client_index') }}">back to list</a>
+<div class="inline-flex rounded-md shadow-sm" role="group">
+    <a class="inline-flex m-2 p-5 items-center btn btn-blue" href="{{ path('app_client_index') }}">retour à la liste</a>
 
-    <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a>
+    <a class="inline-flex m-2 p-5 items-center btn btn-blue"  href="{{ path('app_client_edit', {'id': client.id}) }}">modifier</a>
+</div>
+    
 
     {{ include('backend/client/_delete_form.html.twig') }}
 {% endblock %}

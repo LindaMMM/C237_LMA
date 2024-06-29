@@ -1,41 +1,44 @@
 {% extends 'backend/indextypes.html.twig' %}
 
-{% set title ='TypeCredit index'%}
+{% set title ='Liste TypeCredit'%}
 
 {% block type %}
-    <h1>TypeCredit index</h1>
-
-    <table class="table">
-        <thead>
+    <div class="m-5 p-2 gap-5 grid content-start hover:content-around text-center ">
+     <a class="btn btn-blue p-5" href="{{ path('app_type_credit_new') }}">Création d'un nouveau type</a>
+     </div>
+    
+<table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
+        <thead class="border-b border-neutral-200 font-medium dark:border-white/10">
+    
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Prix</th>
-                <th>NbCredit</th>
-                <th>Enable</th>
+                <th scope="col" class="px-6 py-4">Id</th>
+                <th scope="col" class="px-6 py-4">Nom</th>
+                <th scope="col" class="px-6 py-4">Prix</th>
+                <th scope="col" class="px-6 py-4">NbCredit</th>
+                <th scope="col" class="px-6 py-4">Actif</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for type_credit in type_credits %}
             <tr>
-                <td>{{ type_credit.id }}</td>
-                <td>{{ type_credit.name }}</td>
-                <td>{{ type_credit.prix }}</td>
-                <td>{{ type_credit.nbCredit }}</td>
-                <td>{{ type_credit.Enable ? 'Yes' : 'No' }}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{ type_credit.id }}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{ type_credit.name }}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{ type_credit.prix }}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{ type_credit.nbCredit }}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{ type_credit.Enable ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_type_credit_show', {'id': type_credit.id}) }}">show</a>
-                    <a href="{{ path('app_type_credit_edit', {'id': type_credit.id}) }}">edit</a>
+                    <a class="btn btn-red" href="{{ path('app_type_credit_show', {'id': type_credit.id}) }}">Visualiser</a>
+                    <a class="btn btn-blue" href="{{ path('app_type_credit_edit', {'id': type_credit.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Aucun enregistrement</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_type_credit_new') }}">Create new</a>
+    
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Entity\Client;
+use App\DTO\AddCredit;
 use App\Form\ClientType;
 use App\Form\CreditType;
 use App\Repository\ClientRepository;
@@ -12,21 +13,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/user')]
 #[IsGranted('ROLE_USER')]
 class ClientController extends AbstractController
 {
-    #[Route('/', name: 'app_front_client_index', methods: ['GET'])]
-    public function index(ClientRepository $clientRepository): Response
-    {
-        return $this->render('frontend/index.html.twig', [
-            'controller_name' => 'FrontendController',
-            'isconnected' => $this->getUser() != NULL,
 
-        ]);
-    }
     #[Route('/profil', name: 'app_user_client', methods: ['GET', 'POST'])]
     public function profil(ClientRepository $clientRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -36,7 +30,11 @@ class ClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($client);
             $entityManager->flush();
-            return $this->redirectToRoute('app_front_client_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('notice', 'le profil a été mise à jour.');
+
+            return $this->redirectToRoute('app_user_movie_index', [], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted()) {
+            $this->addFlash('erreur', "le profil n'a pas été mise à jour.");
         }
 
         return $this->render('frontend/user/profil.html.twig', [
@@ -45,27 +43,34 @@ class ClientController extends AbstractController
             'isconnected' => $this->getUser() != NULL,
         ]);
     }
+
     #[Route('/addCredit/{id}', name: 'app_user_add_credit', methods: ['GET', 'POST'])]
     public function addCredit(Client $client, TypeCreditRepository $typecreditRepository,  Request $request, EntityManagerInterface $entityManager): Response
     {
         $typescredit = $typecreditRepository->getallEnable();
-        $form = $this->createForm(CreditType::class, $client->getCredit());
+        $newcredit = new AddCredit();
+        $form = $this->createFormBuilder($newcredit)
+            ->add('quantite', null, ['attr' => array(
+                'readonly' => true,
+            )])
+            ->add('save', SubmitType::class, ['label' => 'sauvegarder', 'attr' => ['class' => 'btn btn-blue btn-blue:hover']])
+            ->getForm();
+
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($client);
+            $toupdatecredit = $client->getCredit();
+            $toupdatecredit->addCredit($newcredit->getQuantite());
             $entityManager->persist($client);
             $entityManager->flush();
-
-            return $this->render('frontend/index.html.twig', [
-                'controller_name' => 'FrontendController',
-                'isconnected' => $this->getUser() != NULL,
-            ]);
+            $this->addFlash('notice', 'Le crédit a été mise à jour.');
+            return $this->redirectToRoute('app_user_client', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('frontend/user/type_credit.html.twig', [
             'form' => $form,
             'types_credit' => $typescredit,
-            'client' => $client,
+            'credit' => $newcredit,
             'isconnected' => $this->getUser() != NULL,
         ]);
     }

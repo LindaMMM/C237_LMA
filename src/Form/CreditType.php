@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use App\Entity\Client;
 use App\Entity\Credit;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -15,8 +14,8 @@ class CreditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('quantite',null,['disabled' => true])
-            ->add('save', SubmitType::class, ['label' => 'envoyer']);
+            ->add('quantite', null, ['disabled' => true])
+            ->add('save', SubmitType::class, ['label' => 'sauvegarder']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

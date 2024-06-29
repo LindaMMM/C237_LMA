@@ -48,7 +48,7 @@ class MovieController extends AbstractController
     #[Route('/{id}', name: 'app_movie_show', methods: ['GET'])]
     public function show(Movie $movie): Response
     {
-        return $this->render('movie/show.html.twig', [
+        return $this->render('backend/movie/show.html.twig', [
             'movie' => $movie,
         ]);
     }

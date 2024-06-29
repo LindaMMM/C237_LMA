@@ -24,7 +24,7 @@ class Media
         minMessage: "Le nom doit compter au moins {{ limit }} caractères."
     )]
     #[Assert\Regex(
-        pattern: '[[:alpha:]]+',
+        pattern: '/\w+/',
         match: true,
         message: "Le nom n'a pas le bon format.",
     )]

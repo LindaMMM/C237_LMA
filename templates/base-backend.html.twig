@@ -60,10 +60,10 @@
       </nav>
 
       </header>
-      <main>
-        <acticle>
+      <main class="p-5 bg-zinc-400 text-white">
+        <acticle class="px-6 py-8 mx-auto ">
           <header>
-            <h2>{{title}}</h2>
+            <h1>{{title}}</h1>
           </header>
           {% block content %}{% endblock %}
 
@@ -72,12 +72,6 @@
           </aside>
       </main>
       <footer>
-        <nav>
-        </nav>
-
-
-
-
         <p>&nbsp;<br>Copyright DVDs
           {{ "now"|date("Y") }}&nbsp;<br>
         </p>

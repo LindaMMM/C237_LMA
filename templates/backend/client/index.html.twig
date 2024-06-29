@@ -3,30 +3,32 @@
 {% set title = "Clients" %}
 
 {% block content %}
-    <a href="{{ path('app_client_new') }}">Create new</a>
-    <table class="table">
-        <thead>
+<div class="m-5 p-2 gap-5 grid content-start hover:content-around text-center ">
+    <a class="btn btn-blue p-5"  href="{{ path('app_client_new') }}">Nouveau</a>
+</div>
+    <table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
+        <thead class="border-b border-neutral-200 font-medium dark:border-white/10">
             <tr>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Actif</th>
-                <th>action</th>
+                <th scope="col" class="px-6 py-4">Prénom</th>
+                <th scope="col" class="px-6 py-4">Nom</th>
+                <th scope="col" class="px-6 py-4">Actif</th>
+                <th scope="col" class="px-6 py-4" >action</th>
             </tr>
         </thead>
         <tbody>
         {% for client in clients %}
             <tr>
-                <td>{{ client.firstName }}</td>
-                <td>{{ client.lastName }}</td>
-                <td>{{ client.Enable ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a>
-                    <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a>
+                <td class="whitespace-nowrap px-6 py-4">{{ client.firstName }}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{ client.lastName }}</td>
+                <td class="whitespace-nowrap px-6 py-4">{{ client.Enable ? 'Yes' : 'No' }}</td>
+                <td class="whitespace-nowrap px-6 py-4">
+                    <a class="btn btn-red"  href="{{ path('app_client_show', {'id': client.id}) }}">Visualiser</a>
+                    <a class="btn btn-blue"  href="{{ path('app_client_edit', {'id': client.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">Aucune client trouver found</td>
+                <td colspan="9">Aucune client trouver</td>
             </tr>
         {% endfor %}
         </tbody>

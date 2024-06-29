@@ -3,5 +3,33 @@
 @tailwind utilities;
 
 body {
-    background-color: rgb(126, 140, 168);
+background-color: rgb(126, 140, 168);
 }
+h1{
+    text-align: center;
+    align-content: center;
+    text-transform: uppercase;
+    }
+
+section{
+@apply bg-gray-200 text-black p-5;
+}
+
+.btn {
+@apply font-bold py-2 px-4 rounded w-full rounded border-solid border-2;
+}
+
+.btn-blue {
+@apply bg-blue-500 text-white;
+}
+.btn-blue:hover {
+@apply bg-blue-700;
+}
+.btn-red {
+@apply bg-red-500 text-white;
+}
+
+.btn-red:hover {
+@apply bg-red-700 text-white;
+}
+

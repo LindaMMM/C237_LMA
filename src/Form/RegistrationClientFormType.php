@@ -29,7 +29,8 @@ class RegistrationClientFormType extends AbstractType
             ->add('enable', HiddenType::class, ['label' => 'Activer'])
 
             ->add('user', RegistrationFormType::class, ['label' => ' '])
-            ->add('save', SubmitType::class, ['label' => 'Enregister']);
+
+            ->add('save', SubmitType::class, ['label' => 'Enregister', 'attr' => ['class' => 'btn btn-blue btn-blue:hover']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

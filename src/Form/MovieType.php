@@ -45,8 +45,7 @@ class MovieType extends AbstractType
                     'data-form-collection-add-label-value' => 'Ajouter un média',
                     'data-form-collection-delete-label-value' => 'Suprimer un média',
                 ]
-            ])
-            ->add('save', SubmitType::class, ['label' => 'envoyer']);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

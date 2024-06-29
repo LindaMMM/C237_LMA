@@ -1,14 +1,15 @@
 {# templates/typecredit/indextypes.html.twig #}
 
 <div>
-    <ul>
-        <li>
+    <ul class="inline-flex items-center rounded-md shadow-sm"
+  role="toolbar">
+        <li class="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-l-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
         <a href="{{ path('app_type_media_index')}}"> Media</a>
         </li>
-        <li>
+        <li class="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border-y border-slate-200 font-medium px-4 py-2 inline-flex space-x-1 items-center">
         <a href="{{ path('app_type_credit_index')}}"> Credit</a>
         </li>
-        <li>
+        <li class="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-slate-200 rounded-r-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">
         <a href="{{ path('app_genre_index')}}"> Genre</a>
         </li>
     </ul>    

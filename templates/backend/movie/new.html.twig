@@ -1,11 +1,14 @@
 {% extends 'base-backend.html.twig' %}
 
-{% set title = 'New Movie' %}
+{% set title = 'Nouveau film' %}
 
 {% block content %}
-    <h1>Create new Movie</h1>
+    
 
     {{ include('backend/movie/_form.html.twig') }}
 
-    <a href="{{ path('app_movie_index') }}">back to list</a>
+<div class="inline-flex rounded-md shadow-sm" role="group">
+    <a class="inline-flex m-2 p-5 items-center btn btn-blue" href="{{ path('app_movie_index') }}">retour à la liste</a>
+</div>
+    
 {% endblock %}

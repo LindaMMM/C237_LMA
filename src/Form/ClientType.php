@@ -23,7 +23,7 @@ class ClientType extends AbstractType
             ->add('firstName', TextType::class, ['label' => 'Prénom'])
             ->add('lastName', TextType::class, ['label' => 'Nom'])
             ->add('addres', TextType::class, ['label' => 'Adresse'])
-            ->add('phone', TelType::class, ['label' => 'Numéro de téléphone'])
+            ->add('phone', TextType::class, ['label' => 'Numéro de téléphone'])
             ->add('dateBirth', null, [
                 'widget' => 'single_text', 'label' => 'Date de naissance'
             ])
@@ -32,10 +32,7 @@ class ClientType extends AbstractType
                 'class' => Credit::class,
                 'choice_label' => 'quantite',
                 'disabled' => true
-            ])
-            ->add('save', SubmitType::class, ['label' => 'envoyer']);
-          
-          
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

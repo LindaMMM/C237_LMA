@@ -48,6 +48,21 @@ class Credit
         return $this;
     }
 
+    public function addCredit(int $quantite): static
+    {
+        $this->quantite += $quantite;
+        $this->dateUpdate = new DateTime("now");
+        return $this;
+    }
+
+    public function substractionCredit(int $quantite): static
+    {
+        $this->quantite = $this->quantite - $quantite;
+        $this->dateUpdate = new DateTime("now");
+        return $this;
+    }
+
+
     public function getDateUpdate(): ?\DateTimeInterface
     {
         return $this->dateUpdate;

@@ -1,13 +1,15 @@
 {% extends 'base-backend.html.twig' %}
 
-{% set title = 'Edit Movie' %}
+{% set title = 'Modification du film' %}
 
 {% block content %}
-    <h1>Edit Movie</h1>
+    
 
-    {{ include('backend/movie/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('backend/movie/_form.html.twig', {'button_label': 'Mise à jour'}) }}
 
-    <a href="{{ path('app_movie_index') }}">back to list</a>
 
-    {{ include('backend/movie/_delete_form.html.twig') }}
+    {{ include('backend/movie/_delete_form.html.twig') }} 
+<div class="inline-flex rounded-md shadow-sm" role="group">
+    <a class="inline-flex m-2 p-5 items-center btn btn-blue" href="{{ path('app_movie_index') }}">retour à la liste</a>
+</div>
 {% endblock %}

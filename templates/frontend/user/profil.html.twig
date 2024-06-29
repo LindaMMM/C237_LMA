@@ -3,23 +3,20 @@
 {% block title %}Profil du client{% endblock %}
 
 {% block content %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="text-red-600 dark:text-red-500" role="alert">{{ flash_error }}</div>
-    {% endfor %}
-
-    <h1>Profil du client</h1>
-
-    {{ form_errors(form) }}
-
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-        <a href="{{ path('app_user_add_credit', {'id': client.id}) }}">Ajouter du crédit</a>
-    
-    {{ form_end(form) }}
-
-
-    
+<section>
+  <h1>Profil du client</h1>
+  <div class="m-5 p-2 gap-5 grid content-start hover:content-around text-center ">
+  <a class="btn btn-blue p-5 " href="{{ path('app_user_add_credit', {'id': client.id}) }}">Ajouter du crédit</a>
+  </div>
+  {{ form_errors(form) }}
+  {{ form_start(form) }}
+  {{ form_widget(form) }}
+  
+  {{ form_end(form) }}
+  
+  
+</section>
 
 
-     
+
 {% endblock %}

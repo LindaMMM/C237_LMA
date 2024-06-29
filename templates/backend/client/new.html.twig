@@ -7,5 +7,9 @@
     
     {{ include('backend/client/_form.html.twig') }}
 
-    <a href="{{ path('app_client_index') }}">retour à la liste</a>
+
+
+    <div class="inline-flex rounded-md shadow-sm" role="group">
+    <a class="inline-flex m-2 p-5 items-center btn btn-blue" href="{{ path('app_client_index') }}">retour à la liste</a>
+</div>
 {% endblock %}

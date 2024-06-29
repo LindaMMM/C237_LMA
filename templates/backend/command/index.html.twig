@@ -1,12 +1,14 @@
 {% extends 'base-backend.html.twig' %}
 
-{% set title = 'Command index'%}
+{% set title = 'Liste des Commandes '%}
 
 {% block content %}
-    <h1>Command index</h1>
-
-    <table class="table">
-        <thead>
+    
+<div class="m-5 p-2 gap-5 grid content-start hover:content-around text-center ">
+     <a class="btn btn-blue p-5" href="{{ path('app_command_new') }}">Création d'une commande</a>
+     </div>
+     <table class="min-w-full text-left text-sm font-light text-surface dark:text-white">
+        <thead class="border-b border-neutral-200 font-medium dark:border-white/10">
             <tr>
                 <th>Id</th>
                 <th>Reference</th>
@@ -37,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_command_new') }}">Create new</a>
+  
 {% endblock %}
