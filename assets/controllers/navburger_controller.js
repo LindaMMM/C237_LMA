@@ -1,29 +1,30 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static values = { state: Boolean };
-  static targets = [
-    "btn_menuprofil",
-    "btn_menu",
-    "btn_search",
-    "btn_shop",
-    "menu",
-    "menuprofil",
-  ];
-  static toggle = { down: String };
+  static targets = ["btn_menuprofil", "btn_search", "btn_shop", "menuprofil"];
+
   connect() {
-    this.btn_menuTarget.addEventListener("click", this.toogleElement);
     this.btn_searchTarget.addEventListener("click", () => {
       this.disableAllMenu();
-      window.location.href = "user/movie/search";
+      this.redirectToRelativeURL("/user/movie/search");
     });
     this.btn_shopTarget.addEventListener("click", () => {
       this.disableAllMenu();
       // redirect
-      window.location.href = "user/basket";
+      this.redirectToRelativeURL("/user/basket");
     });
     this.btn_menuprofilTarget.addEventListener("click", this.toogleElement);
   }
+
+  redirectToRelativeURL = function (path) {
+    const url = new URL(window.location.href);
+    url.pathname = path;
+    // Log the absolute URL (optional)
+    console.log("Redirecting to:", url.href);
+
+    // Redirect to the absolute URL
+    window.location.href = url.href;
+  };
 
   /**
    *
@@ -58,6 +59,5 @@ export default class extends Controller {
 
   disableAllMenu = function () {
     this.menuprofilTarget.classList.add("hidden");
-    this.menuTarget.classList.add("hidden");
   };
 }

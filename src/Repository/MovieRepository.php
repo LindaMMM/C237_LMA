@@ -6,6 +6,8 @@ use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\BrowserKit\Request;
 
 /**
  * @extends ServiceEntityRepository<Movie>
@@ -27,6 +29,14 @@ class MovieRepository extends ServiceEntityRepository
             ->andWhere(Criteria::expr()->eq('enable', movie::STATUS_ACTIF));
     }
 
+    public function getAllEnableQuery()
+    {
+        return $this->createQueryBuilder('movie')
+            ->addCriteria(self::createApprovedCriteria())
+            ->leftJoin('movie.movieStock', 's')
+            ->andWhere('s.stockIn > 0');
+    }
+
     public function findMoviesByName(string $search = null): array
     {
         $queryBuilder = $this->createQueryBuilder('movie')
@@ -44,13 +54,28 @@ class MovieRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Retrieve the list of active orders with all their actives packages
+     * @param $page
+     * @param $limit
+     * @return Paginator
+     */
+    public function paginationMovies(int $page, int $limit): Paginator
+    {
+        $query = $this->getAllEnableQuery();
+        $paginator = new Paginator($query, false);
+
+        $paginator
+            ->getQuery()
+            ->setFirstResult($limit * ($page - 1))
+            ->setMaxResults($limit)
+            ->setHint(Paginator::HINT_ENABLE_DISTINCT, false);
+        return $paginator;
+    }
+
     public function findallenable()
     {
-        return $this->createQueryBuilder('m')
-            ->leftJoin('m.movieStock', 's')
-            ->where('m.enable = TRUE')
-            ->andWhere('s.stockIn > 0')
-            ->groupBy('m.id')
+        return $this->getAllEnableQuery()
             ->getQuery()
             ->getResult();
     }

@@ -20,7 +20,17 @@ class TypeCreditRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, TypeCredit::class);
     }
-
+    public function getallEnable(): array
+    {
+        return $this->createQueryBuilder('t')
+                    ->andWhere('t.enable = true')
+                    ->orderBy('t.id', 'ASC')
+                    ->setMaxResults(10)
+                    ->getQuery()
+                    ->getResult()
+                ;
+    }
+    
     //    /**
     //     * @return TypeCredit[] Returns an array of TypeCredit objects
     //     */

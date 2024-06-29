@@ -33,6 +33,15 @@ class ClientRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getByUserId($user): ?Client
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.user', 'u')
+            ->andWhere('u.id = :idval')
+            ->setParameter('idval', $user->getId())
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
     /**
      * @return Client?
      */
@@ -52,37 +61,11 @@ class ClientRepository extends ServiceEntityRepository
     {
         $email = $user->getEmail();
 
-        return $this->createQueryBugitilder('c')
+        return $this->createQueryBuilder('c')
             ->innerJoin('c.user', 'u')
             ->andWhere('u.email = :val')
             ->setParameter('val', $email)
             ->getQuery()
             ->getOneOrNullResult();
     }
-
-
-    //    /**
-    //     * @return Client[] Returns an array of Client objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Client
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }

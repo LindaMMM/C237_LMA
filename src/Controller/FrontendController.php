@@ -23,27 +23,44 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\Lenth;
 use App\Entity\Movie;
 use App\Entity\Utilisateur;
+use App\Repository\MovieRepository;
+use Symfony\Component\HttpFoundation\Request;
+
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class FrontendController extends AbstractController
 {
-    #[Route('/')]
-    public function index(ClientRepository $clientRepository, UserPasswordHasherInterface $hacher): Response
+    #[Route('/', name: 'app_front_index', methods: ['GET'])]
+    public function index(ClientRepository $clientRepository, MovieRepository $movieRepository, Request $request): Response
     {
-        $client = new Client();
 
+        $client = new Client();
         if ($this->getUser() != NULL) {
             $client = $clientRepository->findbByUser($this->getUser());
         }
+
+        // Paginated Movie ( max 3)
+        $page = $request->query->getInt('page', 1);
+        $limit = 3;
+        $movies = $movieRepository->paginationMovies($page, $limit);
+        $maxpage = ceil($movies->count() / $limit);
+
         if ($client == NULL) {
             return $this->render('backend/index.html.twig', [
                 'controller_name' => 'BackendController',
-                'title' => 'Acceuil',
+                'title' => 'Actualité',
+                "movies" => $movies,
+                "page" => $page,
+                "maxpage" => $maxpage,
             ]);
         } else {
             return $this->render('frontend/index.html.twig', [
                 'controller_name' => 'FrontendController',
                 'isconnected' => $this->getUser() != NULL,
                 'client' =>  $client,
+                "movies" => $movies,
+                "page" => $page,
+                "maxpage" => $maxpage,
             ]);
         }
     }

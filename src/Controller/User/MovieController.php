@@ -24,6 +24,15 @@ class MovieController extends AbstractController
         ]);
     }
 
+    #[Route('/show/{id}', name: 'app_show_movie', methods: ['GET'])]
+    public function show(Movie $movie, MovieRepository $movieRepository, Request $request)
+    {
+        return $this->render('frontend/movie/show.html.twig', [
+            'movie' => $movie,
+            'isconnected' => $this->getUser() != NULL,
+        ]);
+    }
+
     #[Route('/search', name: 'app_search_movie', methods: ['GET'])]
     public function searchmovie(MovieRepository $movieRepository, Request $request)
     {

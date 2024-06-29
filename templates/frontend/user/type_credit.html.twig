@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un crédit{% endblock %}
+
+{% block content %}
+<section data-controller="addcredit">
+    <h1>Profil du client - Ajout d'un crédit</h1>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table data-action= "click->addcredit#logID" class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="p-4">
+                    
+                    
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Type de Crédit
+                                    </th>
+                <th scope="col" class="px-6 py-3">
+                    Nombre de crédit
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Prix
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_credit in types_credit %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                        <input id="checkbox-table"{{ type_credit.nbCredit }} type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="checkbox-table"{{ type_credit.nbCredit }} class="sr-only">checkbox</label>
+                    </div>
+                </td>
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ type_credit.name }}</td>
+                <td class="px-6 py-4">{{ type_credit.nbCredit }}</td>
+                <td class="px-6 py-4">{{ type_credit.prix  }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Aucune type de trouver.</td>
+            </tr>
+        {% endfor %}
+           
+        </tbody>
+    </table>
+</div>
+    {{ form_errors(form) }}
+    {{ form(form) }}
+
+
+
+    <a href="{{ path('app_user_add_credit', {'id': client.id}) }}">Ajouter du crédit</a>
+</section>     
+{% endblock %}

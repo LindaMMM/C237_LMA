@@ -1,5 +1,18 @@
-{% for type,messages in app.flashes%}
-<div>
-{{ messages | join('.') }}
+{% for message in app.flashes('notice') %}
+<div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
+  <p class="font-bold">Sucess</p>
+  <p class="text-sm">
+    {{ message }}
+  </p>
 </div>
+{% endfor %}
+
+{# pass an array argument to get the messages of those types  #}
+{% for label, messages in app.flashes(['warning', 'error']) %}
+    {% for message in messages %}
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold"> {{ label }}</strong>
+        <span class="block sm:inline">{{ message }}</span>
+    </div>
+    {% endfor %}
 {% endfor %}

@@ -1,9 +1,0 @@
-{# templates/frontend/_dvd_details.html.twig #}
-
-{% if movie is not null %}
-   <p><strong>Référence : </strong>{{ movie.id }}</p>
-   <p><strong>Titre : </strong>{{ movie.name }}</p>
-   <p><strong>Date de publication : </strong>{{ movie.dateSortie|date("d/m/Y") }}</p>   
-{% else %}
-   <p>Aucun film ne correspond à cet identifiant dans la base de données.</p>
-{% endif %}

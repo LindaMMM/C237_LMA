@@ -1,31 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% set title = 'Movie' %}
+{% set title = movie.name  %}
 
-{% block body %}
-    <h1>Movie</h1>
+{% block content %}
+<section class="bg-gray-50">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ movie.name }}</td>
-            </tr>
-            <tr>
-                <th>Summary</th>
-                <td>{{ movie.Summary }}</td>
-            </tr>
-            <tr>
-                <th>DateSortie</th>
-                <td>{{ movie.DateSortie ? movie.DateSortie|date('Y-m-d') : '' }}</td>
-            </tr>
-           
-        </tbody>
-    </table>
+  <div class="relative items-center w-4/5 px-2 py-5 mx-auto max-w-7xl">
+    <div class="grid grid-cols-1 gap-3">
 
-    <a href="{{ path('app_movie_index') }}">back to list</a>
+      <div class="p-10">
+        <img class="object-cover object-center w-full mb-8 lg:h-90 md:h-108 rounded-xl" src="{{ movie.medias.count > 0 ? movie.medias[0].path: asset('images/not_available.png') }}" alt="blog">
+        <h1 class="mx-auto mb-8 text-3xl font-semibold leading-none tracking-tighter text-neutral-600 lg:text-4xl">
+          {{ movie.name }}
+        </h1>
+        <p class="mx-auto mb-8  leading-none tracking-tighter text-neutral-600">Genres : <span>
+            {% for genre in movie.genres %}
+            {{ genre.name }}
+            &nbsp;
+            {% endfor %}
+          </span>
+        </p>
+        <p class="mx-auto text-base leading-relaxed text-gray-500">
+          {{ movie.Summary }}
+        </p>
 
-    <a href="{{ path('app_user_add_basket', {'id': movie.id}) }}">add</a>
+        <div class="mt-4">
+          <form action="{{path('app_user_add_basket', {id: movie.id})}}" method="POST">
+            <input type="submit"></input>
+          </form>
+        </div>
+      </div>
 
-  
+    </div>
+  </div>
+</section>
+
+<a href="{{ path('app_user_movie_index') }}">Retour à la liste</a>
+
+
+
+
 {% endblock %}
