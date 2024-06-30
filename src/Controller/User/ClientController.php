@@ -90,7 +90,6 @@ class ClientController extends AbstractController
     {
         $client = $clientRepository->getByUserId($this->getUser());
         $basket = $this->basketServices->getFullBasket();
-        dd($basket);
         return $this->render('frontend/user/basket.html.twig', [
             'controller_name' => 'FrontendController',
             'isconnected' => $this->getUser() != NULL,
@@ -114,7 +113,6 @@ class ClientController extends AbstractController
     public function add_basket(int $id)
     {
         $this->basketServices->addToBasket($id);
-        dd($this->basketServices->getFullBasket());
         $this->addFlash(
             'notice',
             'le film ajouter au panier'

@@ -193,7 +193,7 @@ class AppFixtures extends Fixture
 
         $media_anatomie = new Media();
         $media_anatomie->setName("affiche");
-        $media_anatomie->setPath("https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRlgIE6nCgrEqMH0nQ7r6ssEzZChjlZwVs20bqxC3u9qzFa9mWR");
+        $media_anatomie->setPath("https://fr.web.img6.acsta.net/c_310_420/o_club-allocine-2024-310x420.png_0_se/pictures/24/03/01/10/28/1051187.jpg");
         $media_anatomie->setType($type_Media_png);
 
         $movie_anatomie  = new Movie();

@@ -32,7 +32,8 @@ class ClientType extends AbstractType
                 'class' => Credit::class,
                 'choice_label' => 'quantite',
                 'disabled' => true
-            ]);
+            ])
+            ->add('save', SubmitType::class, ['label' => 'sauvegarder', 'attr'=>['class'=>'btn btn-blue']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
