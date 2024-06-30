@@ -12,13 +12,15 @@
    <header>
       <p>Bienvenue {{client.firstname}} sur notre site !</p>
    </header>
-    
+   <h1>Commande</h1>
+     {% for basket in baskets %}
+     {{basket.movie}}-{{basket.quantity}}
+        {% endfor %}
     
 <div>
 
 </div>
 </section>
-
 
 
 

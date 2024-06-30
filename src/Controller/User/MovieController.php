@@ -18,10 +18,7 @@ class MovieController extends AbstractController
     #[Route('/', name: 'app_user_movie_index', methods: ['GET'])]
     public function index(MovieRepository $movieRepository): Response
     {
-        return $this->render('frontend/movie/index.html.twig', [
-            'movies' => $movieRepository->findallenable(),
-            'isconnected' => $this->getUser() != NULL,
-        ]);
+        return $this->redirectToRoute('app_front_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/show/{id}', name: 'app_show_movie', methods: ['GET'])]
